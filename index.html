@@ -372,6 +372,41 @@ body{
   padding:4px 0;
 }
 
+
+/* Cardio Block */
+.cardio-block{
+  background:rgba(0,217,255,0.05);
+  border:1px solid var(--accent);
+  border-radius:10px;
+  padding:12px;
+  margin-top:12px;
+}
+.cardio-label{
+  font-size:0.85em;
+  font-weight:700;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:6px;
+}
+.cardio-desc{
+  font-size:0.9em;
+  color:var(--text);
+  line-height:1.5;
+}
+.cal-ex-cue{
+  display:none;
+  font-size:0.85em;
+  margin-top:10px;
+  padding:10px;
+  background:rgba(0,217,255,0.05);
+  border-left:3px solid var(--accent);
+  border-radius:0 6px 6px 0;
+  color:var(--text);
+  line-height:1.5;
+}
+.cal-ex.open .cal-ex-cue{display:block}
+
 </style>
 </head><body>
 <div class="container">
@@ -391,126 +426,152 @@ body{
 <div class="weekly-calendar">
 <div class="day-card">
 <div class="day-header">Monday</div>
-<div class="day-subtitle">Upper Chest + Shoulders</div>
+<div class="day-subtitle">Chest + Shoulders</div>
 <div class="day-exercises">
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Incline Barbell Press</span><span class="cal-sets">4×8-10</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/SrqOu55lrYU?autoplay=1&loop=1&mute=1&controls=0&playlist=SrqOu55lrYU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">30° angle. Press up and slightly inward. Builds upper chest.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Incline Dumbbell Press</span><span class="cal-sets">3×10-12</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/PiJQPOiMua4?autoplay=1&loop=1&mute=1&controls=0&playlist=PiJQPOiMua4" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Deep stretch at bottom. Elbows 45°. Fills pectus area.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Overhead Barbell Press</span><span class="cal-sets">4×6-8</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/0fJbmb7wKjU?autoplay=1&loop=1&mute=1&controls=0&playlist=0fJbmb7wKjU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Core tight. Press straight up. Shoulder width builder.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Lateral Raises</span><span class="cal-sets">3×12-15</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/3VcKaXg5f9I?autoplay=1&loop=1&mute=1&controls=0&playlist=3VcKaXg5f9I" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Lead with elbows. Pause at top. Slow negative.</div>
+</div>
+<div class="cardio-block">
+<div class="cardio-label">Cardio</div>
+<div class="cardio-desc">Incline Treadmill Walk (15 min, 3.5 mph, 8-10% incline)</div>
 </div>
 </div>
 </div>
 <div class="day-card">
 <div class="day-header">Tuesday</div>
-<div class="day-subtitle">Lats + Upper Back</div>
+<div class="day-subtitle">Back + Rear Delts</div>
 <div class="day-exercises">
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Weighted Pull-Ups</span><span class="cal-sets">4×8-10</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/eGo4IYlbE5g?autoplay=1&loop=1&mute=1&controls=0&playlist=eGo4IYlbE5g" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Chest to bar. Add weight when hitting 10+ reps. V-taper builder.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>T-Bar Row</span><span class="cal-sets">4×8-10</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/j3Igk5nyZE4?autoplay=1&loop=1&mute=1&controls=0&playlist=j3Igk5nyZE4" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Chest-supported for strict form. Pull to lower chest.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Lat Pulldown</span><span class="cal-sets">3×10-12</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/CAwf7n6Ep-s?autoplay=1&loop=1&mute=1&controls=0&playlist=CAwf7n6Ep-s" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Full stretch at top. Retract shoulder blades at bottom.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Face Pull</span><span class="cal-sets">3×15-20</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/rep-4eQVd6c?autoplay=1&loop=1&mute=1&controls=0&playlist=rep-4eQVd6c" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Pull to face level. Rotate externally. Critical for posture.</div>
+</div>
+<div class="cardio-block">
+<div class="cardio-label">Cardio</div>
+<div class="cardio-desc">Stairmaster (12 min, moderate pace)</div>
 </div>
 </div>
 </div>
 <div class="day-card">
 <div class="day-header">Wednesday</div>
-<div class="day-subtitle">Serratus + Core</div>
+<div class="day-subtitle">Legs + Core</div>
 <div class="day-exercises">
 <div class="cal-ex" onclick="this.classList.toggle('open')">
-<div class="cal-ex-header"><span>Push-Up Plus</span><span class="cal-sets">3×12-15</span></div>
-<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/mJKJmVeWOVU?autoplay=1&loop=1&mute=1&controls=0&playlist=mJKJmVeWOVU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-header"><span>Squats</span><span class="cal-sets">4×8-10</span></div>
+<div class="cal-ex-cue">Depth to parallel. Chest up. Braces entire core.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
-<div class="cal-ex-header"><span>Dumbbell Pullover</span><span class="cal-sets">3×10-12</span></div>
-<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/FK7XoTp3-vI?autoplay=1&loop=1&mute=1&controls=0&playlist=FK7XoTp3-vI" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-</div>
-<div class="cal-ex" onclick="this.classList.toggle('open')">
-<div class="cal-ex-header"><span>Ab Wheel Rollout</span><span class="cal-sets">3×8-10</span></div>
-<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/QGHBgP6pBaU?autoplay=1&loop=1&mute=1&controls=0&playlist=QGHBgP6pBaU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-header"><span>Romanian Deadlifts</span><span class="cal-sets">3×10-12</span></div>
+<div class="cal-ex-cue">Hinge at hips. Feel hamstring stretch. Back straight.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Hanging Leg Raises</span><span class="cal-sets">3×12-15</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/Pr1ieGZ5atk?autoplay=1&loop=1&mute=1&controls=0&playlist=Pr1ieGZ5atk" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Lift knees to chest. Supports rib cage. Control descent.</div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Cable Crunches</span><span class="cal-sets">3×15-20</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/sEqEOJCwIzI?autoplay=1&loop=1&mute=1&controls=0&playlist=sEqEOJCwIzI" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Heavy weight. Pull elbows to knees. Curl spine.</div>
+</div>
+<div class="cardio-block">
+<div class="cardio-label">Cardio</div>
+<div class="cardio-desc">Outdoor Run (1.5-2 miles, easy pace)</div>
 </div>
 </div>
 </div>
 <div class="day-card">
 <div class="day-header">Thursday</div>
-<div class="day-subtitle">Rest / Light Cardio</div>
-<p class="rest-note">Recovery day. Light walk or foam rolling.</p>
-</div>
-<div class="day-card">
-<div class="day-header">Friday</div>
-<div class="day-subtitle">Chest + Lats (Volume)</div>
+<div class="day-subtitle">Upper Power (Mixed)</div>
 <div class="day-exercises">
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Flat Barbell Bench Press</span><span class="cal-sets">4×6-8</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/gRVjAtPip0Y?autoplay=1&loop=1&mute=1&controls=0&playlist=gRVjAtPip0Y" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Overall chest mass. Touch lower chest. Drive through feet.</div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Barbell Rows</span><span class="cal-sets">4×8-10</span></div>
+<div class="cal-ex-cue">Pull to lower chest. Strict form. No body English.</div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Arnold Press</span><span class="cal-sets">3×8-10</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/6Z15_WdXmVw?autoplay=1&loop=1&mute=1&controls=0&playlist=6Z15_WdXmVw" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Rotate as you press. Hits all three delt heads.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Weighted Dips</span><span class="cal-sets">3×8-10</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/2z8JmcrW-As?autoplay=1&loop=1&mute=1&controls=0&playlist=2z8JmcrW-As" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Slight forward lean for lower chest. Full lockout at top.</div>
 </div>
-<div class="cal-ex" onclick="this.classList.toggle('open')">
-<div class="cal-ex-header"><span>Straight-Arm Pulldown</span><span class="cal-sets">3×12-15</span></div>
-<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/okkeD9n_BQM?autoplay=1&loop=1&mute=1&controls=0&playlist=okkeD9n_BQM" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-</div>
-<div class="cal-ex" onclick="this.classList.toggle('open')">
-<div class="cal-ex-header"><span>Cable Crunches</span><span class="cal-sets">3×15-20</span></div>
-<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/sEqEOJCwIzI?autoplay=1&loop=1&mute=1&controls=0&playlist=sEqEOJCwIzI" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cardio-block">
+<div class="cardio-label">Cardio</div>
+<div class="cardio-desc">Incline Treadmill Walk (20 min, 3.0 mph, 12% incline)</div>
 </div>
 </div>
 </div>
 <div class="day-card">
-<div class="day-header">Saturday</div>
-<div class="day-subtitle">Shoulders + Back</div>
+<div class="day-header">Friday</div>
+<div class="day-subtitle">Arms + Core</div>
 <div class="day-exercises">
 <div class="cal-ex" onclick="this.classList.toggle('open')">
-<div class="cal-ex-header"><span>Arnold Press</span><span class="cal-sets">3×8-10</span></div>
-<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/6Z15_WdXmVw?autoplay=1&loop=1&mute=1&controls=0&playlist=6Z15_WdXmVw" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-header"><span>Barbell Curls</span><span class="cal-sets">3×10-12</span></div>
+<div class="cal-ex-cue">Elbows locked at sides. No swinging. Full ROM.</div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Tricep Extensions</span><span class="cal-sets">3×10-12</span></div>
+<div class="cal-ex-cue">Elbows close to head. Full lockout. Slow eccentric.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
 <div class="cal-ex-header"><span>Cable Lateral Raises</span><span class="cal-sets">3×12-15</span></div>
 <div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/kDqklk1ZESo?autoplay=1&loop=1&mute=1&controls=0&playlist=kDqklk1ZESo" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Constant tension. Lead with elbows. Pause at top.</div>
 </div>
 <div class="cal-ex" onclick="this.classList.toggle('open')">
-<div class="cal-ex-header"><span>Seated Cable Row</span><span class="cal-sets">3×10-12</span></div>
-<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/UCXxvVItLoM?autoplay=1&loop=1&mute=1&controls=0&playlist=UCXxvVItLoM" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-header"><span>Ab Wheel Rollout</span><span class="cal-sets">3×8-10</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/QGHBgP6pBaU?autoplay=1&loop=1&mute=1&controls=0&playlist=QGHBgP6pBaU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="cal-ex-cue">Core + serratus activation. Roll out slowly. Don't let hips sag.</div>
 </div>
-<div class="cal-ex" onclick="this.classList.toggle('open')">
-<div class="cal-ex-header"><span>Reverse Pec Deck Fly</span><span class="cal-sets">3×12-15</span></div>
-<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/ea7KoHB8wfY?autoplay=1&loop=1&mute=1&controls=0&playlist=ea7KoHB8wfY" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-</div>
-</div>
-</div>
-<div class="day-card">
-<div class="day-header">Sunday</div>
-<div class="day-subtitle">Full Rest</div>
-<p class="rest-note">Recovery day. Light walk or foam rolling.</p>
+<div class="cardio-block">
+<div class="cardio-label">Cardio</div>
+<div class="cardio-desc">Outdoor Walk (20-30 min, brisk pace)</div>
 </div>
 </div>
 </div>
+</div>
+</div>
+
 
 <div id="tab2" class="tab-content">
 <div class="bento-grid">
