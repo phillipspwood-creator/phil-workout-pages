@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Phil's Training Program</title>
+<title>Phil's Training Program - Pectus Support</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -174,46 +174,6 @@ body{
 }
 .ex.open .ex-cue{display:block}
 
-.dir-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:20px;
-}
-.dir-card{
-  background:var(--glass);
-  backdrop-filter:blur(20px);
-  border:1px solid var(--glass-border);
-  border-radius:20px;
-  overflow:hidden;
-  transition:all 0.3s;
-}
-.dir-card:hover{
-  border-color:var(--accent);
-  box-shadow:0 8px 32px var(--accent-glow);
-  transform:translateY(-2px);
-}
-.dir-video{
-  width:100%;
-  height:220px;
-  border-bottom:1px solid var(--glass-border);
-}
-.dir-body{padding:20px}
-.dir-name{
-  font-size:1.1em;
-  font-weight:700;
-  color:var(--text);
-  margin-bottom:8px;
-}
-.dir-muscle{
-  font-size:0.75em;
-  color:var(--accent);
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:12px;
-  font-weight:600;
-}
-.dir-cue{font-size:0.88em;color:var(--muted);line-height:1.6}
-
 .meal-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
@@ -264,7 +224,7 @@ body{
 }
 
 @media(max-width:640px){
-  .bento-grid,.dir-grid,.meal-grid{grid-template-columns:1fr}
+  .bento-grid,.meal-grid{grid-template-columns:1fr}
   .header h1{font-size:2em}
 }
 </style>
@@ -272,260 +232,278 @@ body{
 <div class="container">
 <div class="header">
 <h1>Phil's Mass Builder</h1>
-<p>Shoulders • Back • Core | Pectus Support Program</p>
+<p>Upper Chest • Lats • Serratus | Pectus Support Program</p>
 <div class="badge">STRENGTH • POSTURE • GROWTH</div>
 </div>
 
 <div class="tabs">
-<button class="tab-btn active" onclick="switchTab(1)">Weekly Plan</button>
-<button class="tab-btn" onclick="switchTab(2)">Exercise Library</button>
-<button class="tab-btn" onclick="switchTab(3)">Meal Shortcuts</button>
+<button class="tab-btn active" onclick="switchTab(1)">Exercise Library</button>
+<button class="tab-btn" onclick="switchTab(2)">Meal Shortcuts</button>
 </div>
 
 <div id="tab1" class="tab-content active">
 <div class="bento-grid">
 
 <div class="bento-card">
-<div class="day-name">Monday</div>
-<div class="day-focus">Chest + Shoulders</div>
+<div class="day-name">Upper Chest</div>
+<div class="day-focus">Pectus Support Program</div>
 <div class="ex-list">
 <div class="ex" onclick="this.classList.toggle('open')">
 <div class="ex-header">
-<span class="ex-name">Incline DB Press</span><span class="ex-sets">4×8-10</span>
+<span class="ex-name">Incline Barbell Press</span><span class="ex-sets">4×8-10</span>
 </div>
-<div class="ex-muscle">Upper Chest, Front Delts</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/PiJQPOiMua4?autoplay=1&loop=1&mute=1&controls=0&playlist=PiJQPOiMua4" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Elbows 45°. Press up and inward. Builds upper chest to fill pectus area.</div>
+<div class="ex-muscle">Upper Chest</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/SrqOu55lrYU?autoplay=1&loop=1&mute=1&controls=0&playlist=SrqOu55lrYU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Primary upper chest builder. 30° angle.</div>
 </div>
 <div class="ex" onclick="this.classList.toggle('open')">
 <div class="ex-header">
-<span class="ex-name">Overhead Press</span><span class="ex-sets">4×6-8</span>
+<span class="ex-name">Incline Dumbbell Press</span><span class="ex-sets">4×8-10</span>
+</div>
+<div class="ex-muscle">Upper Chest</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/PiJQPOiMua4?autoplay=1&loop=1&mute=1&controls=0&playlist=PiJQPOiMua4" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Deep stretch. Fills pectus area.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Low-to-High Cable Fly</span><span class="ex-sets">3×12-15</span>
+</div>
+<div class="ex-muscle">Upper Chest</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/taI4XduLpTk?autoplay=1&loop=1&mute=1&controls=0&playlist=taI4XduLpTk" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Isolation. Continuous tension.</div>
+</div>
+</div>
+</div>
+<div class="bento-card">
+<div class="day-name">Mid/Lower Chest</div>
+<div class="day-focus">Pectus Support Program</div>
+<div class="ex-list">
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Flat Barbell Bench Press</span><span class="ex-sets">4×6-8</span>
+</div>
+<div class="ex-muscle">Mid/Lower Chest</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/gRVjAtPip0Y?autoplay=1&loop=1&mute=1&controls=0&playlist=gRVjAtPip0Y" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Overall chest mass.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Weighted Dips</span><span class="ex-sets">3×8-10</span>
+</div>
+<div class="ex-muscle">Mid/Lower Chest</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/2z8JmcrW-As?autoplay=1&loop=1&mute=1&controls=0&playlist=2z8JmcrW-As" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Slight forward lean for lower chest.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Cable Chest Press</span><span class="ex-sets">3×10-12</span>
+</div>
+<div class="ex-muscle">Mid/Lower Chest</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/3SiESICuUZk?autoplay=1&loop=1&mute=1&controls=0&playlist=3SiESICuUZk" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Constant tension.</div>
+</div>
+</div>
+</div>
+<div class="bento-card">
+<div class="day-name">Serratus Anterior</div>
+<div class="day-focus">Pectus Support Program</div>
+<div class="ex-list">
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Push-Up Plus</span><span class="ex-sets">3×12-15</span>
+</div>
+<div class="ex-muscle">Serratus Anterior</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/mJKJmVeWOVU?autoplay=1&loop=1&mute=1&controls=0&playlist=mJKJmVeWOVU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Critical for ribcage appearance. Protraction focus.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Dumbbell Pullover</span><span class="ex-sets">3×10-12</span>
+</div>
+<div class="ex-muscle">Serratus Anterior</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/FK7XoTp3-vI?autoplay=1&loop=1&mute=1&controls=0&playlist=FK7XoTp3-vI" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Stretches serratus + lats.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Ab Wheel Rollout</span><span class="ex-sets">3×8-10</span>
+</div>
+<div class="ex-muscle">Serratus Anterior</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/QGHBgP6pBaU?autoplay=1&loop=1&mute=1&controls=0&playlist=QGHBgP6pBaU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Core + serratus activation.</div>
+</div>
+</div>
+</div>
+<div class="bento-card">
+<div class="day-name">Lats</div>
+<div class="day-focus">Pectus Support Program</div>
+<div class="ex-list">
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Weighted Pull-Ups</span><span class="ex-sets">4×8-10</span>
+</div>
+<div class="ex-muscle">Lats</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/eGo4IYlbE5g?autoplay=1&loop=1&mute=1&controls=0&playlist=eGo4IYlbE5g" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Wide + neutral grip. Creates V-taper.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Lat Pulldown</span><span class="ex-sets">3×10-12</span>
+</div>
+<div class="ex-muscle">Lats</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/CAwf7n6Ep-s?autoplay=1&loop=1&mute=1&controls=0&playlist=CAwf7n6Ep-s" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Full stretch at top.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Straight-Arm Pulldown</span><span class="ex-sets">3×12-15</span>
+</div>
+<div class="ex-muscle">Lats</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/okkeD9n_BQM?autoplay=1&loop=1&mute=1&controls=0&playlist=okkeD9n_BQM" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Lat isolation.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">One-Arm Cable Row</span><span class="ex-sets">3×10-12</span>
+</div>
+<div class="ex-muscle">Lats</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/MQW9cH2ZRVI?autoplay=1&loop=1&mute=1&controls=0&playlist=MQW9cH2ZRVI" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Long range of motion.</div>
+</div>
+</div>
+</div>
+<div class="bento-card">
+<div class="day-name">Upper Back</div>
+<div class="day-focus">Pectus Support Program</div>
+<div class="ex-list">
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">T-Bar Row</span><span class="ex-sets">4×8-10</span>
+</div>
+<div class="ex-muscle">Upper Back</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/j3Igk5nyZE4?autoplay=1&loop=1&mute=1&controls=0&playlist=j3Igk5nyZE4" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Chest-supported for strict form.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Seated Cable Row</span><span class="ex-sets">3×10-12</span>
+</div>
+<div class="ex-muscle">Upper Back</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/UCXxvVItLoM?autoplay=1&loop=1&mute=1&controls=0&playlist=UCXxvVItLoM" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Neutral grip. Mid-back thickness.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Face Pull</span><span class="ex-sets">3×15-20</span>
+</div>
+<div class="ex-muscle">Upper Back</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/rep-4eQVd6c?autoplay=1&loop=1&mute=1&controls=0&playlist=rep-4eQVd6c" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">External rotation. Posture correction.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Reverse Pec Deck Fly</span><span class="ex-sets">3×12-15</span>
+</div>
+<div class="ex-muscle">Upper Back</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/ea7KoHB8wfY?autoplay=1&loop=1&mute=1&controls=0&playlist=ea7KoHB8wfY" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Rear delt + upper back.</div>
+</div>
+</div>
+</div>
+<div class="bento-card">
+<div class="day-name">Shoulders</div>
+<div class="day-focus">Pectus Support Program</div>
+<div class="ex-list">
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Overhead Barbell Press</span><span class="ex-sets">4×6-8</span>
 </div>
 <div class="ex-muscle">Shoulders</div>
 <div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/0fJbmb7wKjU?autoplay=1&loop=1&mute=1&controls=0&playlist=0fJbmb7wKjU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Core tight. Press straight up. Builds shoulder width.</div>
+<div class="ex-cue">Main shoulder mass builder.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Arnold Press</span><span class="ex-sets">3×8-10</span>
+</div>
+<div class="ex-muscle">Shoulders</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/6Z15_WdXmVw?autoplay=1&loop=1&mute=1&controls=0&playlist=6Z15_WdXmVw" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">All three delt heads.</div>
 </div>
 <div class="ex" onclick="this.classList.toggle('open')">
 <div class="ex-header">
 <span class="ex-name">Lateral Raises</span><span class="ex-sets">3×12-15</span>
 </div>
-<div class="ex-muscle">Lateral Delts</div>
+<div class="ex-muscle">Shoulders</div>
 <div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/3VcKaXg5f9I?autoplay=1&loop=1&mute=1&controls=0&playlist=3VcKaXg5f9I" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Lead with elbows. Pause at top.</div>
+<div class="ex-cue">Shoulder width.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Cable Lateral Raises</span><span class="ex-sets">3×12-15</span>
+</div>
+<div class="ex-muscle">Shoulders</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/kDqklk1ZESo?autoplay=1&loop=1&mute=1&controls=0&playlist=kDqklk1ZESo" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Constant tension on delts.</div>
 </div>
 </div>
 </div>
-
 <div class="bento-card">
-<div class="day-name">Tuesday</div>
-<div class="day-focus">Back + Rear Delts</div>
+<div class="day-name">Core</div>
+<div class="day-focus">Pectus Support Program</div>
 <div class="ex-list">
-<div class="ex" onclick="this.classList.toggle('open')">
-<div class="ex-header">
-<span class="ex-name">Pull-Ups</span><span class="ex-sets">4×8-10</span>
-</div>
-<div class="ex-muscle">Lats, Upper Back</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/eGo4IYlbE5g?autoplay=1&loop=1&mute=1&controls=0&playlist=eGo4IYlbE5g" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Chest to bar. Builds V-taper for pectus offset.</div>
-</div>
-<div class="ex" onclick="this.classList.toggle('open')">
-<div class="ex-header">
-<span class="ex-name">Barbell Rows</span><span class="ex-sets">4×8-10</span>
-</div>
-<div class="ex-muscle">Mid Back, Lats</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/FWJR5Ve8bnQ?autoplay=1&loop=1&mute=1&controls=0&playlist=FWJR5Ve8bnQ" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Pull to lower chest. Retract shoulder blades.</div>
-</div>
-<div class="ex" onclick="this.classList.toggle('open')">
-<div class="ex-header">
-<span class="ex-name">Face Pulls</span><span class="ex-sets">3×15-20</span>
-</div>
-<div class="ex-muscle">Rear Delts</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/rep-4eQVd6c?autoplay=1&loop=1&mute=1&controls=0&playlist=rep-4eQVd6c" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Critical for posture. Pull to face. Rotate externally.</div>
-</div>
-</div>
-</div>
-
-<div class="bento-card">
-<div class="day-name">Wednesday</div>
-<div class="day-focus">Legs + Core</div>
-<div class="ex-list">
-<div class="ex" onclick="this.classList.toggle('open')">
-<div class="ex-header">
-<span class="ex-name">Squats</span><span class="ex-sets">4×8-10</span>
-</div>
-<div class="ex-muscle">Quads, Glutes, Core</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/ultWZbUMPL8?autoplay=1&loop=1&mute=1&controls=0&playlist=ultWZbUMPL8" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Chest up. Depth to parallel. Braces entire core.</div>
-</div>
-<div class="ex" onclick="this.classList.toggle('open')">
-<div class="ex-header">
-<span class="ex-name">Romanian Deadlifts</span><span class="ex-sets">3×10-12</span>
-</div>
-<div class="ex-muscle">Hamstrings, Glutes</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/UyRiw2b8yI4?autoplay=1&loop=1&mute=1&controls=0&playlist=UyRiw2b8yI4" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Hinge at hips. Feel hamstring stretch.</div>
-</div>
 <div class="ex" onclick="this.classList.toggle('open')">
 <div class="ex-header">
 <span class="ex-name">Hanging Leg Raises</span><span class="ex-sets">3×12-15</span>
 </div>
-<div class="ex-muscle">Lower Abs</div>
+<div class="ex-muscle">Core</div>
 <div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/Pr1ieGZ5atk?autoplay=1&loop=1&mute=1&controls=0&playlist=Pr1ieGZ5atk" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Lift knees to chest. Supports rib cage.</div>
-</div>
-</div>
-</div>
-
-<div class="bento-card">
-<div class="day-name">Thursday</div>
-<div class="day-focus">Rest Day</div>
-<p style="color:var(--muted);padding:16px 0">20-30min walk or light cardio. Foam roll shoulders/back. Recovery is growth.</p>
-</div>
-
-<div class="bento-card">
-<div class="day-name">Friday</div>
-<div class="day-focus">Upper Power</div>
-<div class="ex-list">
-<div class="ex" onclick="this.classList.toggle('open')">
-<div class="ex-header">
-<span class="ex-name">Weighted Pull-Ups</span><span class="ex-sets">4×5-6</span>
-</div>
-<div class="ex-muscle">Lats, Upper Back</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/eGo4IYlbE5g?autoplay=1&loop=1&mute=1&controls=0&playlist=eGo4IYlbE5g" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Add weight. Heavy strength work.</div>
-</div>
-<div class="ex" onclick="this.classList.toggle('open')">
-<div class="ex-header">
-<span class="ex-name">Arnold Press</span><span class="ex-sets">4×8-10</span>
-</div>
-<div class="ex-muscle">All Three Delt Heads</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/6Z15_WdXmVw?autoplay=1&loop=1&mute=1&controls=0&playlist=6Z15_WdXmVw" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Rotate as you press. Builds round shoulders.</div>
-</div>
-</div>
-</div>
-
-<div class="bento-card">
-<div class="day-name">Saturday</div>
-<div class="day-focus">Arms + Core</div>
-<div class="ex-list">
-<div class="ex" onclick="this.classList.toggle('open')">
-<div class="ex-header">
-<span class="ex-name">Barbell Curls</span><span class="ex-sets">3×10-12</span>
-</div>
-<div class="ex-muscle">Biceps</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/kwG2ipFRgfo?autoplay=1&loop=1&mute=1&controls=0&playlist=kwG2ipFRgfo" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Elbows locked at sides. Full ROM.</div>
-</div>
-<div class="ex" onclick="this.classList.toggle('open')">
-<div class="ex-header">
-<span class="ex-name">Tricep Extensions</span><span class="ex-sets">3×10-12</span>
-</div>
-<div class="ex-muscle">Triceps</div>
-<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/nRiJVZDpdL0?autoplay=1&loop=1&mute=1&controls=0&playlist=nRiJVZDpdL0" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Elbows close to head. Full lockout.</div>
+<div class="ex-cue">Lower abs. Supports rib cage.</div>
 </div>
 <div class="ex" onclick="this.classList.toggle('open')">
 <div class="ex-header">
 <span class="ex-name">Cable Crunches</span><span class="ex-sets">3×15-20</span>
 </div>
-<div class="ex-muscle">Upper Abs</div>
+<div class="ex-muscle">Core</div>
 <div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/sEqEOJCwIzI?autoplay=1&loop=1&mute=1&controls=0&playlist=sEqEOJCwIzI" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="ex-cue">Pull elbows to knees. Curl spine.</div>
+<div class="ex-cue">Heavy upper ab work.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Ab Wheel Rollout</span><span class="ex-sets">3×8-10</span>
+</div>
+<div class="ex-muscle">Core</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/QGHBgP6pBaU?autoplay=1&loop=1&mute=1&controls=0&playlist=QGHBgP6pBaU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Full core stabilization.</div>
 </div>
 </div>
 </div>
-
 <div class="bento-card">
-<div class="day-name">Sunday</div>
-<div class="day-focus">Full Rest</div>
-<p style="color:var(--muted);padding:16px 0">Sleep 8+ hours. Eat at maintenance or slight surplus. Muscle grows during rest.</p>
+<div class="day-name">Posture/Spine</div>
+<div class="day-focus">Pectus Support Program</div>
+<div class="ex-list">
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Back Extensions</span><span class="ex-sets">3×12-15</span>
 </div>
-
+<div class="ex-muscle">Posture/Spine</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/ph3pddNKzzw?autoplay=1&loop=1&mute=1&controls=0&playlist=ph3pddNKzzw" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Glute-biased + upper back focus. Spinal strength.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<div class="ex-header">
+<span class="ex-name">Face Pull</span><span class="ex-sets">3×15-20</span>
+</div>
+<div class="ex-muscle">Posture/Spine</div>
+<div class="ex-video"><iframe width="100%" height="200" src="https://www.youtube.com/embed/rep-4eQVd6c?autoplay=1&loop=1&mute=1&controls=0&playlist=rep-4eQVd6c" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+<div class="ex-cue">Already listed above. High priority.</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
 <div id="tab2" class="tab-content">
-<div class="dir-grid">
-
-<div class="dir-card">
-<div class="dir-video"><iframe width="100%" height="220" src="https://www.youtube.com/embed/0fJbmb7wKjU?autoplay=1&loop=1&mute=1&controls=0&playlist=0fJbmb7wKjU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="dir-body">
-<div class="dir-name">Overhead Press</div>
-<div class="dir-muscle">Shoulders</div>
-<div class="dir-cue">Press straight up. Core tight.</div>
-</div>
-</div>
-
-<div class="dir-card">
-<div class="dir-video"><iframe width="100%" height="220" src="https://www.youtube.com/embed/3VcKaXg5f9I?autoplay=1&loop=1&mute=1&controls=0&playlist=3VcKaXg5f9I" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="dir-body">
-<div class="dir-name">Lateral Raises</div>
-<div class="dir-muscle">Shoulders</div>
-<div class="dir-cue">Builds width. Lead with elbows.</div>
-</div>
-</div>
-
-<div class="dir-card">
-<div class="dir-video"><iframe width="100%" height="220" src="https://www.youtube.com/embed/eGo4IYlbE5g?autoplay=1&loop=1&mute=1&controls=0&playlist=eGo4IYlbE5g" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="dir-body">
-<div class="dir-name">Pull-Ups</div>
-<div class="dir-muscle">Back</div>
-<div class="dir-cue">Chest to bar. Builds V-taper.</div>
-</div>
-</div>
-
-<div class="dir-card">
-<div class="dir-video"><iframe width="100%" height="220" src="https://www.youtube.com/embed/FWJR5Ve8bnQ?autoplay=1&loop=1&mute=1&controls=0&playlist=FWJR5Ve8bnQ" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="dir-body">
-<div class="dir-name">Barbell Rows</div>
-<div class="dir-muscle">Back</div>
-<div class="dir-cue">Pull to chest. Retract shoulder blades.</div>
-</div>
-</div>
-
-<div class="dir-card">
-<div class="dir-video"><iframe width="100%" height="220" src="https://www.youtube.com/embed/rep-4eQVd6c?autoplay=1&loop=1&mute=1&controls=0&playlist=rep-4eQVd6c" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="dir-body">
-<div class="dir-name">Face Pulls</div>
-<div class="dir-muscle">Rear Delts</div>
-<div class="dir-cue">Critical for posture.</div>
-</div>
-</div>
-
-<div class="dir-card">
-<div class="dir-video"><iframe width="100%" height="220" src="https://www.youtube.com/embed/Pr1ieGZ5atk?autoplay=1&loop=1&mute=1&controls=0&playlist=Pr1ieGZ5atk" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="dir-body">
-<div class="dir-name">Hanging Leg Raises</div>
-<div class="dir-muscle">Abs</div>
-<div class="dir-cue">Supports rib cage.</div>
-</div>
-</div>
-
-<div class="dir-card">
-<div class="dir-video"><iframe width="100%" height="220" src="https://www.youtube.com/embed/ultWZbUMPL8?autoplay=1&loop=1&mute=1&controls=0&playlist=ultWZbUMPL8" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="dir-body">
-<div class="dir-name">Squats</div>
-<div class="dir-muscle">Legs / Core</div>
-<div class="dir-cue">Chest up. Depth to parallel.</div>
-</div>
-</div>
-
-<div class="dir-card">
-<div class="dir-video"><iframe width="100%" height="220" src="https://www.youtube.com/embed/PiJQPOiMua4?autoplay=1&loop=1&mute=1&controls=0&playlist=PiJQPOiMua4" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
-<div class="dir-body">
-<div class="dir-name">Incline DB Press</div>
-<div class="dir-muscle">Chest</div>
-<div class="dir-cue">Builds upper chest for pectus.</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div id="tab3" class="tab-content">
 <div class="meal-grid">
 
 <div class="meal" onclick="this.classList.toggle('open')">
