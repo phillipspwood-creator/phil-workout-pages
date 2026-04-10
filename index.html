@@ -1,2256 +1,372 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phil's Training Program</title>
+<html><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phil's Mass Builder</title>
 <style>
-  :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --card: #22263a;
-    --border: #2d3150;
-    --accent: #4f8ef7;
-    --accent2: #7c3aed;
-    --green: #22c55e;
-    --red: #ef4444;
-    --yellow: #eab308;
-    --text: #e2e8f0;
-    --muted: #8892b0;
-    --radius: 12px;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  /* ─── HEADER ─── */
-  .header {
-    background: linear-gradient(135deg, #0f1117 0%, #1a1d27 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 16px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(12px);
-  }
-
-  .header-top {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 16px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .logo {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-
-  .header-title h1 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-  }
-
-  .header-title p {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-top: 1px;
-  }
-
-  .pe-badge {
-    margin-left: auto;
-    background: rgba(34, 197, 94, 0.15);
-    color: var(--green);
-    border: 1px solid rgba(34, 197, 94, 0.35);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  /* ─── TABS ─── */
-  .tabs {
-    display: flex;
-    gap: 4px;
-    max-width: 900px;
-    margin: 0 auto;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .tabs::-webkit-scrollbar { display: none; }
-
-  .tab-btn {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 0.88rem;
-    font-weight: 500;
-    padding: 10px 18px;
-    cursor: pointer;
-    position: relative;
-    white-space: nowrap;
-    transition: color 0.2s;
-    letter-spacing: 0.2px;
-  }
-
-  .tab-btn.active {
-    color: var(--accent);
-  }
-
-  .tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 2px 2px 0 0;
-  }
-
-  .tab-btn:hover:not(.active) { color: var(--text); }
-
-  /* ─── MAIN ─── */
-  .main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px 16px 60px;
-  }
-
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  /* ─── DAY SELECTOR ─── */
-  .day-selector {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-    margin-bottom: 20px;
-  }
-  .day-selector::-webkit-scrollbar { display: none; }
-
-  .day-btn {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 0.82rem;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
-  }
-
-  .day-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
-
-  .day-btn:hover:not(.active) {
-    border-color: var(--accent);
-    color: var(--text);
-  }
-
-  /* ─── DAY HEADER ─── */
-  .day-header {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .day-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-
-  .day-info h2 {
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-
-  .day-info p {
-    color: var(--muted);
-    font-size: 0.82rem;
-    margin-top: 2px;
-  }
-
-  .day-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-  }
-
-  .tag {
-    font-size: 0.72rem;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-weight: 500;
-  }
-
-  .tag-blue { background: rgba(79,142,247,0.15); color: var(--accent); }
-  .tag-purple { background: rgba(124,58,237,0.15); color: #a78bfa; }
-  .tag-green { background: rgba(34,197,94,0.15); color: var(--green); }
-
-  /* ─── EXERCISE GRID ─── */
-  .exercise-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-  }
-
-  /* ─── EXERCISE CARD ─── */
-  .ex-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: transform 0.2s, border-color 0.2s;
-  }
-
-  .ex-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
-  }
-
-  /* ─── ANIMATED IMAGE ─── */
-  .ex-img-wrap {
-    position: relative;
-    width: 100%;
-    padding-top: 62%;
-    background: #111827;
-    overflow: hidden;
-  }
-
-  .ex-img-wrap img {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: opacity 0.35s ease-in-out;
-  }
-
-  .ex-img-wrap img.frame-b {
-    opacity: 0;
-  }
-
-  .ex-img-wrap.animating img.frame-a {
-    animation: frameA 1.6s steps(1, end) infinite;
-  }
-  .ex-img-wrap.animating img.frame-b {
-    animation: frameB 1.6s steps(1, end) infinite;
-  }
-
-  @keyframes frameA {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
-  @keyframes frameB {
-    0%, 49% { opacity: 0; }
-    50%, 100% { opacity: 1; }
-  }
-
-  .play-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.4);
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-
-  .play-overlay:hover { background: rgba(0,0,0,0.3); }
-
-  .play-btn {
-    width: 46px;
-    height: 46px;
-    background: rgba(79,142,247,0.9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    transition: transform 0.2s;
-  }
-
-  .play-overlay:hover .play-btn { transform: scale(1.1); }
-
-  .ex-img-wrap.animating .play-overlay { display: none; }
-
-  .ex-img-wrap .img-source {
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
-    background: rgba(0,0,0,0.6);
-    color: #64748b;
-    font-size: 0.65rem;
-    padding: 2px 6px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
-  }
-
-  /* ─── CARD BODY ─── */
-  .ex-body {
-    padding: 14px 16px;
-  }
-
-  .ex-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .ex-name {
-    font-size: 0.95rem;
-    font-weight: 700;
-    line-height: 1.3;
-  }
-
-  .sets-badge {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #fff;
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 4px 9px;
-    border-radius: 6px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .ex-meta {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-
-  .ex-meta-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    color: var(--muted);
-    font-size: 0.77rem;
-  }
-
-  .ex-meta-item span { font-size: 14px; }
-
-  /* ─── FORM CUES ─── */
-  .cues-toggle {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 0.77rem;
-    padding: 5px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.15s;
-    width: 100%;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .cues-toggle:hover { border-color: var(--accent); color: var(--text); }
-
-  .cues-content {
-    display: none;
-    margin-top: 10px;
-    padding: 10px 12px;
-    background: rgba(15,17,23,0.8);
-    border-radius: 8px;
-    border: 1px solid var(--border);
-  }
-
-  .cues-content.open { display: block; }
-
-  .cues-content ol {
-    padding-left: 18px;
-    color: var(--muted);
-    font-size: 0.8rem;
-    line-height: 1.7;
-  }
-
-  .cues-content li { margin-bottom: 2px; }
-
-  .pe-note {
-    margin-top: 8px;
-    padding: 6px 10px;
-    background: rgba(34,197,94,0.08);
-    border-left: 3px solid var(--green);
-    border-radius: 0 6px 6px 0;
-    color: var(--green);
-    font-size: 0.75rem;
-  }
-
-  /* ─── DAY PANEL ─── */
-  .day-panel { display: none; }
-  .day-panel.active { display: block; }
-
-  /* ─── NUTRITION ─── */
-  .nutrition-hero {
-    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(79,142,247,0.1));
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 24px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 16px;
-  }
-
-  .macro-stat {
-    text-align: center;
-  }
-
-  .macro-stat .val {
-    font-size: 1.8rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: block;
-  }
-
-  .macro-stat .label {
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 2px;
-  }
-
-  .macro-bar {
-    height: 4px;
-    border-radius: 2px;
-    margin-top: 6px;
-    background: var(--border);
-    overflow: hidden;
-  }
-
-  .macro-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-  }
-
-  .section-title {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* ─── MEAL CARDS ─── */
-  .meal-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .meal-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: border-color 0.2s;
-  }
-
-  .meal-card:hover { border-color: var(--accent); }
-
-  .meal-num {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 0.85rem;
-    flex-shrink: 0;
-    color: #fff;
-  }
-
-  .meal-info { flex: 1; }
-
-  .meal-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 2px;
-  }
-
-  .meal-time {
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
-  .meal-macros {
-    display: flex;
-    gap: 10px;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .meal-macro {
-    font-size: 0.75rem;
-  }
-
-  .meal-macro .mval {
-    font-weight: 700;
-    display: block;
-  }
-
-  .meal-macro .mlabel {
-    color: var(--muted);
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-  }
-
-  .macro-p { color: #4ade80; }
-  .macro-c { color: #60a5fa; }
-  .macro-f { color: #fb923c; }
-
-  /* ─── SHOPPING LIST ─── */
-  .shopping-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .shop-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.85rem;
-  }
-
-  .shop-item span { font-size: 18px; }
-
-  /* ─── PREP STRATEGY ─── */
-  .prep-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-
-  .prep-step {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    display: flex;
-    gap: 14px;
-  }
-
-  .prep-icon {
-    font-size: 22px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .prep-step h4 { font-size: 0.9rem; margin-bottom: 4px; }
-  .prep-step p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
-
-  /* ─── ABOUT ─── */
-  .about-section {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .about-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-  }
-
-  .about-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .about-card p, .about-card li {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  .about-card ul, .about-card ol {
-    padding-left: 20px;
-  }
-
-  .about-card li { margin-bottom: 4px; }
-
-  .highlight-box {
-    background: rgba(79,142,247,0.08);
-    border: 1px solid rgba(79,142,247,0.25);
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-top: 12px;
-  }
-
-  .highlight-box p {
-    color: var(--text) !important;
-    font-size: 0.85rem;
-    line-height: 1.6;
-  }
-
-  .split-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.83rem;
-    margin-top: 8px;
-  }
-
-  .split-table th {
-    background: var(--card);
-    color: var(--muted);
-    text-align: left;
-    padding: 8px 12px;
-    font-weight: 600;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .split-table td {
-    padding: 10px 12px;
-    border-top: 1px solid var(--border);
-    color: var(--text);
-  }
-
-  .split-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-  .day-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 8px;
-  }
-
-  /* ─── PROGRESS TRACKER ─── */
-  .tracker {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .tracker h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 14px; }
-
-  .week-dots {
-    display: flex;
-    gap: 8px;
-  }
-
-  .week-dot {
-    flex: 1;
-    text-align: center;
-  }
-
-  .week-dot .dot {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 4px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--muted);
-  }
-
-  .week-dot .dot:hover { border-color: var(--accent); color: var(--accent); }
-  .week-dot .dot.done { background: var(--green); border-color: var(--green); color: #fff; }
-  .week-dot .dot.today { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 3px rgba(79,142,247,0.2); }
-
-  .week-dot .dlabel { font-size: 0.65rem; color: var(--muted); }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 480px) {
-    .exercise-grid { grid-template-columns: 1fr; }
-    .day-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .meal-macros { flex-direction: column; gap: 4px; }
-    .nutrition-hero { grid-template-columns: repeat(2, 1fr); }
-    .header-title h1 { font-size: 1.1rem; }
-    .pe-badge { display: none; }
-  }
-
-  @media (max-width: 360px) {
-    .tabs { gap: 0; }
-    .tab-btn { padding: 10px 12px; font-size: 0.82rem; }
-  }
-
-  /* ─── LOADING SKELETON ─── */
-  .skeleton {
-    background: linear-gradient(90deg, var(--surface) 0%, var(--card) 50%, var(--surface) 100%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 4px;
-  }
-
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#c9d1d9;--heading:#e6edf3;--muted:#8b949e;--blue:#58a6ff;--green:#3fb950}
+body{background:var(--bg);color:var(--text);font-family:sans-serif;padding:20px}
+.container{max-width:1200px;margin:0 auto}
+h1{color:var(--heading);text-align:center;margin-bottom:40px}
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:32px}
+.tab-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:12px 24px;border-radius:8px;cursor:pointer;font-weight:600}
+.tab-btn.active{background:var(--blue);color:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+.week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.day-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
+.day-name{font-size:1.3em;font-weight:700;color:var(--heading)}
+.day-focus{color:var(--blue);margin:4px 0 16px}
+.ex{background:#1c2128;border:1px solid var(--border);border-radius:8px;padding:12px;margin:8px 0;cursor:pointer}
+.ex:hover{border-color:var(--green)}
+.ex-name{font-weight:600;color:var(--heading)}
+.ex-sets{float:right;color:var(--green);font-weight:700}
+.ex-gif{display:none;width:100%;height:180px;background:#000;margin-top:8px;border-radius:6px;overflow:hidden}
+.ex-gif img{width:100%;height:100%;object-fit:cover}
+.ex.open .ex-gif{display:block}
+.ex-cue{display:none;font-size:0.85em;margin-top:8px;padding:8px;background:rgba(255,255,255,0.03);border-left:3px solid var(--blue)}
+.ex.open .ex-cue{display:block}
+.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.dir-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.dir-gif{width:100%;height:200px;background:#000}
+.dir-gif img{width:100%;height:100%;object-fit:cover}
+.dir-body{padding:16px}
+.dir-name{font-weight:700;color:var(--heading);margin-bottom:8px}
+.meal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.meal{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;cursor:pointer}
+.meal:hover{border-color:var(--green)}
+.meal-name{font-weight:700;color:var(--heading);margin-bottom:12px}
+.meal-body{display:none;margin-top:12px}
+.meal.open .meal-body{display:block}
+.meal-body h4{color:var(--blue);font-size:0.85em;margin:12px 0 6px}
+.meal-body ul{padding-left:20px}
+.meal-body li{font-size:0.9em;margin:4px 0}
 </style>
-</head>
-<body>
-
-<!-- ─── HEADER ─── -->
-<div class="header">
-  <div class="header-top">
-    <div class="logo">💪</div>
-    <div class="header-title">
-      <h1>Phil's Training Program</h1>
-      <p>5-Day Split · PE-Safe · Rhomboid Rehab</p>
-    </div>
-    <div class="pe-badge">✓ PE-Safe</div>
-  </div>
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('workout')">Workout</button>
-    <button class="tab-btn" onclick="switchTab('nutrition')">Nutrition</button>
-    <button class="tab-btn" onclick="switchTab('about')">About</button>
-  </div>
+</head><body>
+<div class="container">
+<h1>💪 Phil's Mass Builder</h1>
+<div class="tabs">
+<button class="tab-btn active" onclick="switchTab(1)">Weekly Plan</button>
+<button class="tab-btn" onclick="switchTab(2)">Exercise Directory</button>
+<button class="tab-btn" onclick="switchTab(3)">Meal Shortcuts</button>
 </div>
 
-<!-- ─── MAIN ─── -->
-<div class="main">
-
-  <!-- ═══════════════════════ WORKOUT TAB ═══════════════════════ -->
-  <div id="tab-workout" class="tab-panel active">
-
-    <!-- Week Tracker -->
-    <div class="tracker">
-      <h3>📅 This Week</h3>
-      <div class="week-dots">
-        <div class="week-dot">
-          <div class="dot" id="wd1" onclick="toggleDay(1)">P</div>
-          <div class="dlabel">Push</div>
-        </div>
-        <div class="week-dot">
-          <div class="dot" id="wd2" onclick="toggleDay(2)">P</div>
-          <div class="dlabel">Pull</div>
-        </div>
-        <div class="week-dot">
-          <div class="dot" id="wd3" onclick="toggleDay(3)">L</div>
-          <div class="dlabel">Legs</div>
-        </div>
-        <div class="week-dot">
-          <div class="dot" id="wd4" onclick="toggleDay(4)">S</div>
-          <div class="dlabel">Shldrs</div>
-        </div>
-        <div class="week-dot">
-          <div class="dot" id="wd5" onclick="toggleDay(5)">B</div>
-          <div class="dlabel">Back</div>
-        </div>
-        <div class="week-dot">
-          <div class="dot" id="wd6" onclick="toggleDay(6)">R</div>
-          <div class="dlabel">Rest</div>
-        </div>
-        <div class="week-dot">
-          <div class="dot" id="wd7" onclick="toggleDay(7)">R</div>
-          <div class="dlabel">Rest</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Day Selector -->
-    <div class="day-selector">
-      <button class="day-btn active" onclick="switchDay(1)">Day 1 · Push/Serratus</button>
-      <button class="day-btn" onclick="switchDay(2)">Day 2 · Pull/Rhomboid</button>
-      <button class="day-btn" onclick="switchDay(3)">Day 3 · Legs + Core</button>
-      <button class="day-btn" onclick="switchDay(4)">Day 4 · Shoulders</button>
-      <button class="day-btn" onclick="switchDay(5)">Day 5 · Back + Biceps</button>
-    </div>
-
-    <!-- ── DAY 1: Push / Serratus ── -->
-    <div id="day-1" class="day-panel active">
-      <div class="day-header">
-        <div class="day-icon" style="background: linear-gradient(135deg,rgba(79,142,247,0.2),rgba(79,142,247,0.1))">🫀</div>
-        <div class="day-info">
-          <h2>Day 1 — Push / Serratus</h2>
-          <p>Chest · Triceps · Serratus Anterior</p>
-          <div class="day-tags">
-            <span class="tag tag-green">PE-Safe · No Flat Bench</span>
-            <span class="tag tag-blue">6 Exercises</span>
-            <span class="tag tag-purple">~50 min</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exercise-grid">
-
-        <!-- 1. Incline Dumbbell Press -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-1">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg" alt="Incline Dumbbell Press start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/1.jpg" alt="Incline Dumbbell Press end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-1')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Incline Dumbbell Press</div>
-              <div class="sets-badge">4×10</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Dumbbells</div>
-              <div class="ex-meta-item"><span>🎯</span> Chest, Triceps</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Set bench to 30–45° incline — upper chest without shoulder impingement</li>
-                <li>Retract scapula before pressing; keep them pinched throughout</li>
-                <li>Lower dumbbells to chest line, not below — protect PE sternum</li>
-                <li>Press in a slight arc, meet at top without fully locking elbows</li>
-                <li>Control the eccentric — 3 seconds down</li>
-              </ol>
-              <div class="pe-note">✓ PE-Safe: Incline angle reduces direct sternal pressure vs. flat bench</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. Incline Cable Fly -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-2">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Cable_Flye/0.jpg" alt="Incline Cable Flye start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Cable_Flye/1.jpg" alt="Incline Cable Flye end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-2')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Incline Cable Fly</div>
-              <div class="sets-badge">3×12</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🔗</span> Cable Machine</div>
-              <div class="ex-meta-item"><span>🎯</span> Upper Chest, Serratus</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Set cables at low position, bench at 30–45° incline</li>
-                <li>At the top, actively reach and protract (push the scapulae apart) — this fires serratus anterior</li>
-                <li>Wide arc on the descent, feel the chest stretch</li>
-                <li>Control the return, never let cables yank arms back</li>
-                <li>Light weight — this is serratus work, not ego lifting</li>
-              </ol>
-              <div class="pe-note">✓ PE-Safe: Top protraction squeeze directly activates serratus anterior</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. Low Cable Crossover -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-3">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Low_Cable_Crossover/0.jpg" alt="Low Cable Crossover start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Low_Cable_Crossover/1.jpg" alt="Low Cable Crossover end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-3')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Low Cable Crossover</div>
-              <div class="sets-badge">3×15</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🔗</span> Cable Machine</div>
-              <div class="ex-meta-item"><span>🎯</span> Serratus, Upper Chest</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Pull cables from low to high in a hugging arc</li>
-                <li>At peak contraction, CRUNCH your scapulae apart (protract) — this IS the serratus move</li>
-                <li>Slight forward lean for full range of motion</li>
-                <li>Pause 1 second at top, feel ribs wing forward</li>
-                <li>3 sets lightweight — serratus activation, not load</li>
-              </ol>
-              <div class="pe-note">✓ PE-Safe: Low-to-high arc avoids compression on the sternum</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4. Chest Dips -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-4">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dips_-_Chest_Version/0.jpg" alt="Chest Dips start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dips_-_Chest_Version/1.jpg" alt="Chest Dips end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-4')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Chest Dips</div>
-              <div class="sets-badge">3×8–12</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>⚡</span> Parallel Bars</div>
-              <div class="ex-meta-item"><span>🎯</span> Lower Chest, Triceps</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Lean forward 20–30° to shift emphasis to chest</li>
-                <li>Lower until upper arm is parallel to ground — don't go deeper if shoulders protest</li>
-                <li>Keep elbows flared at ~45° angle</li>
-                <li>Press back up, do NOT fully lock out at top</li>
-                <li>Skip or use assisted machine if shoulder pain occurs</li>
-              </ol>
-              <div class="pe-note">✓ PE-Safe: No sternal contact; forward lean keeps ribs clear</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Cable Rope Overhead Tricep Extension -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-5">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/0.jpg" alt="Overhead Tricep Extension start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/1.jpg" alt="Overhead Tricep Extension end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-5')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Cable Rope Overhead Tricep Extension</div>
-              <div class="sets-badge">3×12</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🔗</span> Cable + Rope</div>
-              <div class="ex-meta-item"><span>🎯</span> Long Head Tricep</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Face away from cable stack, rope pulled overhead</li>
-                <li>Elbows point straight up — don't let them flare wide</li>
-                <li>Lower rope behind head with full stretch (feel long head)</li>
-                <li>Extend fully to lockout, squeeze at top</li>
-                <li>Core braced throughout — resist torso lean</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. Push Up to Side Plank (Serratus) -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-6">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push_Up_to_Side_Plank/0.jpg" alt="Push Up to Side Plank start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push_Up_to_Side_Plank/1.jpg" alt="Push Up to Side Plank end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-6')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Push-Up to Side Plank</div>
-              <div class="sets-badge">3×8/side</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>⚡</span> Bodyweight</div>
-              <div class="ex-meta-item"><span>🎯</span> Serratus, Core, Chest</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Perform a push-up — at the top, PUSH the floor away (serratus activation)</li>
-                <li>Rotate into side plank, reach free arm to ceiling</li>
-                <li>Hold side plank for 1–2 sec — feel under-arm ribs tighten</li>
-                <li>Return to push-up, alternate sides</li>
-                <li>If too hard: do the push-up + rotation without the top press</li>
-              </ol>
-              <div class="pe-note">✓ Serratus Key: The "plus" push-up (extra protraction at top) is the most direct serratus exercise</div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /exercise-grid -->
-    </div><!-- /day-1 -->
-
-    <!-- ── DAY 2: Pull / Rhomboid ── -->
-    <div id="day-2" class="day-panel">
-      <div class="day-header">
-        <div class="day-icon" style="background: linear-gradient(135deg,rgba(124,58,237,0.2),rgba(124,58,237,0.1))">🔙</div>
-        <div class="day-info">
-          <h2>Day 2 — Pull / Rhomboid</h2>
-          <p>Lats · Mid-Back · Rhomboids · Lower Traps</p>
-          <div class="day-tags">
-            <span class="tag tag-purple">Rhomboid Rehab Focus</span>
-            <span class="tag tag-blue">5 Exercises</span>
-            <span class="tag tag-purple">~45 min</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exercise-grid">
-
-        <!-- 7. Wide-Grip Lat Pulldown -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-7">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Lat_Pulldown/0.jpg" alt="Wide-Grip Lat Pulldown start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Lat_Pulldown/1.jpg" alt="Wide-Grip Lat Pulldown end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-7')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Wide-Grip Lat Pulldown</div>
-              <div class="sets-badge">4×10</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🔗</span> Cable Machine</div>
-              <div class="ex-meta-item"><span>🎯</span> Lats, Rhomboids</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Slight backward lean (~15°), chest up, proud posture</li>
-                <li>Initiate pull by DEPRESSING scapulae first (pull shoulders down before arms move)</li>
-                <li>Drive elbows toward hips — not behind you</li>
-                <li>Touch bar to upper chest, squeeze lats at bottom</li>
-                <li>Control the ascent — resist the bar going up</li>
-              </ol>
-              <div class="pe-note">✓ Rhomboid: Scapular depression initiation hits rhomboids at stretch, lower traps on contraction</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8. Seated Cable Rows -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-8">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Seated Cable Rows start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/1.jpg" alt="Seated Cable Rows end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-8')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Seated Cable Row</div>
-              <div class="sets-badge">4×10</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🔗</span> Cable Machine</div>
-              <div class="ex-meta-item"><span>🎯</span> Mid-Back, Rhomboids</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Use a wide/overhand grip to increase rhomboid recruitment</li>
-                <li>Row to lower sternum/upper abs — elbows flare slightly out</li>
-                <li>At peak contraction: squeeze shoulder blades TOGETHER and DOWN (retraction + depression)</li>
-                <li>Hold the contraction 1–2 seconds — this is the rhomboid squeeze</li>
-                <li>Let the shoulder blades FULLY protract on return — full range = full rehab</li>
-              </ol>
-              <div class="pe-note">✓ Rhomboid Rehab: Wide grip + elbow flare = maximal rhomboid/mid-trap activation</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 9. Face Pull -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-9">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg" alt="Face Pull start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/1.jpg" alt="Face Pull end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-9')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Face Pull</div>
-              <div class="sets-badge">4×15</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🔗</span> Cable + Rope</div>
-              <div class="ex-meta-item"><span>🎯</span> Rear Delt, Lower Trap, Rhomboid</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Cable set at face height; use rope attachment with overhand grip</li>
-                <li>Pull rope TO FACE — separate hands at end of movement (thumbs toward ears)</li>
-                <li>Elbows must stay at or ABOVE shoulder height throughout</li>
-                <li>Think: "show off your biceps and squeeze your rhomboids"</li>
-                <li>Light weight only — this is corrective work, not heavy pulling</li>
-              </ol>
-              <div class="pe-note">✓ Rhomboid Rehab: Arguably the #1 corrective exercise for rhomboid weakness and rounded shoulders</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 10. One-Arm Dumbbell Row -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-10">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Dumbbell_Row/0.jpg" alt="One-Arm Dumbbell Row start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Dumbbell_Row/1.jpg" alt="One-Arm Dumbbell Row end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-10')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">One-Arm Dumbbell Row</div>
-              <div class="sets-badge">3×10/side</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Dumbbell</div>
-              <div class="ex-meta-item"><span>🎯</span> Lats, Mid-Back, Rhomboids</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Neutral spine, knee and hand on bench for support</li>
-                <li>Initiate with the ELBOW, not the hand — pull elbow to hip</li>
-                <li>At top: rotate torso slightly and really squeeze the shoulder blade in</li>
-                <li>Full protraction on the descent — shoulder blade reaches forward</li>
-                <li>Don't rush — this is a 2-second up, 3-second down movement</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 11. Reverse Flyes (Y-Raise / Lower Trap) -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-11">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Flyes/0.jpg" alt="Reverse Flyes start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Flyes/1.jpg" alt="Reverse Flyes end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-11')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Reverse Fly (Y-Raise Focus)</div>
-              <div class="sets-badge">4×15</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Light Dumbbells</div>
-              <div class="ex-meta-item"><span>🎯</span> Lower Trap, Rhomboid, Rear Delt</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Prone on incline bench (45°) or bent over; chest supported is ideal</li>
-                <li>Raise arms in a Y-shape (30–45° above horizontal) — NOT straight out like a T</li>
-                <li>Thumbs pointing UP at the top — this externally rotates and fires the lower traps</li>
-                <li>Squeeze at the top for 2 seconds — you should feel mid-back below the upper traps</li>
-                <li>VERY light weight — lower trap and rhomboids fatigue quickly on these</li>
-              </ol>
-              <div class="pe-note">✓ Rhomboid Key: Y-raise with thumb-up cue = lower trap + rhomboid maximal activation. The most targeted rehab move for this area.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><!-- /day-2 -->
-
-    <!-- ── DAY 3: Legs + Core ── -->
-    <div id="day-3" class="day-panel">
-      <div class="day-header">
-        <div class="day-icon" style="background: linear-gradient(135deg,rgba(34,197,94,0.2),rgba(34,197,94,0.1))">🦵</div>
-        <div class="day-info">
-          <h2>Day 3 — Legs + Core</h2>
-          <p>Quads · Hamstrings · Glutes · Abs</p>
-          <div class="day-tags">
-            <span class="tag tag-green">Compound Foundation</span>
-            <span class="tag tag-blue">6 Exercises</span>
-            <span class="tag tag-purple">~55 min</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exercise-grid">
-
-        <!-- 12. Goblet Squat -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-12">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg" alt="Goblet Squat start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/1.jpg" alt="Goblet Squat end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-12')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Goblet Squat</div>
-              <div class="sets-badge">4×12</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Dumbbell / Kettlebell</div>
-              <div class="ex-meta-item"><span>🎯</span> Quads, Glutes, Core</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Hold weight at chest height with both hands (goblet position)</li>
-                <li>Feet shoulder-width, toes out 15–30°</li>
-                <li>Sit BETWEEN your heels, not back — elbows should track inside knees at the bottom</li>
-                <li>Chest stays up — weight acts as counterbalance</li>
-                <li>Drive through full foot, not just heels; squeeze glutes at top</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 13. Leg Press -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-13">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg" alt="Leg Press start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/1.jpg" alt="Leg Press end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-13')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Leg Press</div>
-              <div class="sets-badge">4×12</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>⚡</span> Leg Press Machine</div>
-              <div class="ex-meta-item"><span>🎯</span> Quads, Hamstrings, Glutes</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Feet hip-width in the middle of the platform</li>
-                <li>Lower until knees are at 90° — back stays flat against pad</li>
-                <li>NEVER let lower back round off the seat — this is a spine injury</li>
-                <li>Do NOT lock out knees at the top — keep slight bend</li>
-                <li>For glute emphasis: higher foot placement; quad emphasis: lower</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 14. Romanian Deadlift -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-14">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Romanian_Deadlift/0.jpg" alt="Romanian Deadlift start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Romanian_Deadlift/1.jpg" alt="Romanian Deadlift end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-14')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Romanian Deadlift (RDL)</div>
-              <div class="sets-badge">3×10</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Barbell or Dumbbells</div>
-              <div class="ex-meta-item"><span>🎯</span> Hamstrings, Glutes, Lower Back</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Hip-hinge movement — push hips BACK, not down</li>
-                <li>Bar/dumbbells stay close to legs throughout — drag them down your thighs</li>
-                <li>Maintain neutral spine at all times — no rounding the lower back</li>
-                <li>Feel the hamstrings stretch as you hinge; that is your depth cue, not the floor</li>
-                <li>Drive hips through at the top — full glute squeeze</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 15. Bodyweight Walking Lunge -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-15">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg" alt="Walking Lunge start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/1.jpg" alt="Walking Lunge end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-15')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Walking Lunge</div>
-              <div class="sets-badge">3×12/leg</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>⚡</span> Bodyweight / Dumbbells</div>
-              <div class="ex-meta-item"><span>🎯</span> Quads, Glutes, Hip Flexors</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Step forward far enough that both knees form 90° angles</li>
-                <li>Back knee barely touches (or hovers above) the floor</li>
-                <li>Torso stays upright — don't lean forward</li>
-                <li>Drive through front heel to stand; step forward with back foot</li>
-                <li>Add dumbbells once bodyweight feels easy for 3×15+</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 16. Lying Leg Curls -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-16">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Leg_Curls/0.jpg" alt="Lying Leg Curls start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Leg_Curls/1.jpg" alt="Lying Leg Curls end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-16')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Lying Leg Curls</div>
-              <div class="sets-badge">3×12</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>⚡</span> Leg Curl Machine</div>
-              <div class="ex-meta-item"><span>🎯</span> Hamstrings (Bicep Femoris)</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Adjust pad to just above ankles — not on calves</li>
-                <li>Curl heels toward glutes — full range of motion</li>
-                <li>Keep hips pressed into the pad — no lifting the butt</li>
-                <li>Squeeze hamstrings hard at peak contraction; hold 1 sec</li>
-                <li>Slow eccentric (3 sec) — this is where the growth happens</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 17. Plank -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-17">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plank/0.jpg" alt="Plank start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plank/1.jpg" alt="Plank end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-17')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Plank</div>
-              <div class="sets-badge">3×45–90 sec</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>⚡</span> Bodyweight</div>
-              <div class="ex-meta-item"><span>🎯</span> Core, Serratus, Shoulders</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Forearms and toes on ground; elbows under shoulders</li>
-                <li>PUSH floor away from you — this engages serratus and prevents collapse</li>
-                <li>Squeeze glutes and quads; don't let hips sag or rise</li>
-                <li>Neutral neck — don't crane up or drop head</li>
-                <li>Breathe steadily; brace core like you're bracing for a punch</li>
-              </ol>
-              <div class="pe-note">✓ Serratus bonus: Active push-away cue fires serratus anterior, reinforcing Day 1 work</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><!-- /day-3 -->
-
-    <!-- ── DAY 4: Shoulders ── -->
-    <div id="day-4" class="day-panel">
-      <div class="day-header">
-        <div class="day-icon" style="background: linear-gradient(135deg,rgba(234,179,8,0.2),rgba(234,179,8,0.1))">🎯</div>
-        <div class="day-info">
-          <h2>Day 4 — Shoulders</h2>
-          <p>Anterior · Lateral · Posterior Deltoids</p>
-          <div class="day-tags">
-            <span class="tag tag-blue">5 Exercises</span>
-            <span class="tag tag-purple">~45 min</span>
-            <span class="tag tag-green">Rear Delt Emphasis</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exercise-grid">
-
-        <!-- 18. Arnold Dumbbell Press -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-18">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arnold_Dumbbell_Press/0.jpg" alt="Arnold Press start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arnold_Dumbbell_Press/1.jpg" alt="Arnold Press end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-18')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Arnold Press</div>
-              <div class="sets-badge">4×10</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Dumbbells</div>
-              <div class="ex-meta-item"><span>🎯</span> All 3 Delt Heads</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Start with palms facing you (like top of a curl)</li>
-                <li>As you press, rotate palms OUT — forward-facing at the top</li>
-                <li>The rotation recruits all three delt heads in sequence</li>
-                <li>Don't rush the rotation — it should be smooth and controlled</li>
-                <li>Slight backward lean; don't press directly overhead (protect shoulder)</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 19. Side Lateral Raise -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-19">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg" alt="Side Lateral Raise start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/1.jpg" alt="Side Lateral Raise end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-19')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Side Lateral Raise</div>
-              <div class="sets-badge">4×15</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Light Dumbbells</div>
-              <div class="ex-meta-item"><span>🎯</span> Lateral Delt (Width)</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Slight forward lean of the torso (10–15°) — maximizes lateral delt</li>
-                <li>Lead with your ELBOWS, not your hands — think "pour a pitcher of water"</li>
-                <li>Stop at shoulder height — going higher turns it into a trap exercise</li>
-                <li>Slight internal rotation (pinky slightly higher) targets lateral delt best</li>
-                <li>Go light — lateral delts are small. 4 sets of 15 with perfect form > ego weight</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 20. Dumbbell Lying Rear Lateral Raise -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-20">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Lying_Rear_Lateral_Raise/0.jpg" alt="Rear Lateral Raise start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Lying_Rear_Lateral_Raise/1.jpg" alt="Rear Lateral Raise end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-20')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Lying Rear Lateral Raise</div>
-              <div class="sets-badge">3×15</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Light Dumbbells</div>
-              <div class="ex-meta-item"><span>🎯</span> Rear Delt, Lower Trap, Rhomboid</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Lie prone on flat or slight incline bench, face down</li>
-                <li>Arms hang neutral or slightly in front of shoulders</li>
-                <li>Raise arms in a Y or T pattern with THUMBS UP for external rotation</li>
-                <li>Feel the rear delt/mid-back squeeze at the top — hold 1–2 sec</li>
-                <li>Gravity-assisted isolation — very light weight, high reps</li>
-              </ol>
-              <div class="pe-note">✓ Rhomboid bonus: Prone position gravity-loads the rhomboid and lower trap without spinal loading</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 21. Dumbbell Shoulder Press -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-21">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg" alt="Dumbbell Shoulder Press start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/1.jpg" alt="Dumbbell Shoulder Press end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-21')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Dumbbell Shoulder Press</div>
-              <div class="sets-badge">4×10</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Dumbbells</div>
-              <div class="ex-meta-item"><span>🎯</span> Front + Lateral Delt, Triceps</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Start at ear level, elbows at ~90° (slight forward tilt preferred over T-pose)</li>
-                <li>Press UP and slightly together — meet at top without touching</li>
-                <li>Don't fully lock out — keep tension on delts throughout</li>
-                <li>Lower slowly (3 sec) — this is where shoulder stability is built</li>
-                <li>Core braced, lower back slightly arched but natural — no excessive lean back</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 22. Scapular Pull-Up -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-22">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg" alt="Scapular Pull-Up start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/1.jpg" alt="Scapular Pull-Up end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-22')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Scapular Pull-Up</div>
-              <div class="sets-badge">3×10–12</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>⚡</span> Pull-Up Bar</div>
-              <div class="ex-meta-item"><span>🎯</span> Rhomboids, Lower Trap, Serratus</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Hang from pull-up bar, arms straight, relaxed</li>
-                <li>WITHOUT bending elbows, DEPRESS your shoulder blades (pull them down)</li>
-                <li>You will rise ~2 inches — this is the entire movement</li>
-                <li>Hold the contraction for 2–3 seconds; feel rhomboids and lower traps fire</li>
-                <li>Slowly return to dead hang — full elevation</li>
-              </ol>
-              <div class="pe-note">✓ Best shoulder stability exercise in existence. Directly strengthens the scapular stabilizers responsible for PE posture correction.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><!-- /day-4 -->
-
-    <!-- ── DAY 5: Back + Biceps ── -->
-    <div id="day-5" class="day-panel">
-      <div class="day-header">
-        <div class="day-icon" style="background: linear-gradient(135deg,rgba(239,68,68,0.2),rgba(239,68,68,0.1))">💪</div>
-        <div class="day-info">
-          <h2>Day 5 — Back + Biceps</h2>
-          <p>Mid-Back · Lats · Biceps (Long & Short Head)</p>
-          <div class="day-tags">
-            <span class="tag tag-blue">4 Exercises</span>
-            <span class="tag tag-purple">~40 min</span>
-            <span class="tag tag-green">Arm Emphasis Day</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exercise-grid">
-
-        <!-- 23. Bent Over Barbell Row -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-23">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Barbell_Row/0.jpg" alt="Bent Over Row start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Barbell_Row/1.jpg" alt="Bent Over Row end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-23')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Bent Over Barbell Row</div>
-              <div class="sets-badge">4×8</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Barbell</div>
-              <div class="ex-meta-item"><span>🎯</span> Mid-Back, Lats, Rhomboids, Biceps</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Hinge to ~45°; overhand grip slightly wider than shoulder-width</li>
-                <li>Row the bar to your LOWER chest / upper abdomen — not your belly button</li>
-                <li>Lead with elbows, NOT hands — think "stab elbows behind you"</li>
-                <li>Hold the contraction; retract and depress scapula simultaneously</li>
-                <li>If lower back fatigues: switch to chest-supported incline row instead</li>
-              </ol>
-              <div class="pe-note">✓ PE Tip: If flat barbell bench is avoided, heavy rowing helps balance anterior/posterior strength ratio</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 24. Close-Grip Front Lat Pulldown -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-24">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Front_Lat_Pulldown/0.jpg" alt="Close-Grip Lat Pulldown start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Front_Lat_Pulldown/1.jpg" alt="Close-Grip Lat Pulldown end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-24')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Close-Grip Lat Pulldown</div>
-              <div class="sets-badge">3×12</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🔗</span> Cable Machine</div>
-              <div class="ex-meta-item"><span>🎯</span> Lats (Long Head), Biceps</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Close neutral or underhand grip emphasizes lat long head and biceps</li>
-                <li>Lean back slightly; pull bar to upper chest</li>
-                <li>Think "elbows to pockets" — drives lats through full range</li>
-                <li>Really squeeze at the bottom; don't just move the bar</li>
-                <li>Full stretch at top — feel lats elongate</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 25. EZ-Bar Curl -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-25">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/EZ-Bar_Curl/0.jpg" alt="EZ-Bar Curl start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/EZ-Bar_Curl/1.jpg" alt="EZ-Bar Curl end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-25')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">EZ-Bar Curl</div>
-              <div class="sets-badge">3×10</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> EZ Curl Bar</div>
-              <div class="ex-meta-item"><span>🎯</span> Biceps Short + Long Head</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Semi-supinated grip (inner angled grip) — easier on wrists than straight bar</li>
-                <li>Elbows stay pinned to sides throughout — no swinging or using momentum</li>
-                <li>Full range: nearly full extension at bottom, full supination/contraction at top</li>
-                <li>Squeeze the bicep at the top — don't just touch your shoulders and drop</li>
-                <li>Slow eccentric (3 sec) — this builds real size</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- 26. Hammer Curls -->
-        <div class="ex-card">
-          <div class="ex-img-wrap" id="wrap-26">
-            <img class="frame-a" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hammer_Curls/0.jpg" alt="Hammer Curls start" loading="lazy">
-            <img class="frame-b" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hammer_Curls/1.jpg" alt="Hammer Curls end" loading="lazy">
-            <div class="play-overlay" onclick="startAnim('wrap-26')">
-              <div class="play-btn">▶</div>
-            </div>
-            <div class="img-source">free-exercise-db</div>
-          </div>
-          <div class="ex-body">
-            <div class="ex-header">
-              <div class="ex-name">Hammer Curls</div>
-              <div class="sets-badge">3×12</div>
-            </div>
-            <div class="ex-meta">
-              <div class="ex-meta-item"><span>🏋️</span> Dumbbells</div>
-              <div class="ex-meta-item"><span>🎯</span> Brachialis, Brachioradialis, Bicep Long Head</div>
-            </div>
-            <button class="cues-toggle" onclick="toggleCues(this)">
-              Form Cues <span>▾</span>
-            </button>
-            <div class="cues-content">
-              <ol>
-                <li>Neutral grip (thumbs up) throughout entire movement</li>
-                <li>Curl alternating or simultaneously — alternate gives more control</li>
-                <li>Hit the brachialis (under the bicep) — this gives arm THICKNESS</li>
-                <li>Don't supinate at the top — keep neutral to target brachialis</li>
-                <li>Superset with EZ-bar for a killer bicep pump</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><!-- /day-5 -->
-
-  </div><!-- /tab-workout -->
-
-  <!-- ═══════════════════════ NUTRITION TAB ═══════════════════════ -->
-  <div id="tab-nutrition" class="tab-panel">
-
-    <!-- Macro Summary -->
-    <div class="nutrition-hero">
-      <div class="macro-stat">
-        <span class="val">2,650</span>
-        <div class="label">Calories / day</div>
-        <div class="macro-bar"><div class="macro-bar-fill" style="width:100%;background:linear-gradient(90deg,#4f8ef7,#7c3aed)"></div></div>
-      </div>
-      <div class="macro-stat">
-        <span class="val" style="background:linear-gradient(135deg,#4ade80,#22c55e);-webkit-background-clip:text;background-clip:text">200g</span>
-        <div class="label">Protein</div>
-        <div class="macro-bar"><div class="macro-bar-fill" style="width:73%;background:#4ade80"></div></div>
-      </div>
-      <div class="macro-stat">
-        <span class="val" style="background:linear-gradient(135deg,#60a5fa,#3b82f6);-webkit-background-clip:text;background-clip:text">248g</span>
-        <div class="label">Carbs</div>
-        <div class="macro-bar"><div class="macro-bar-fill" style="width:90%;background:#60a5fa"></div></div>
-      </div>
-      <div class="macro-stat">
-        <span class="val" style="background:linear-gradient(135deg,#fb923c,#f97316);-webkit-background-clip:text;background-clip:text">72g</span>
-        <div class="label">Fat</div>
-        <div class="macro-bar"><div class="macro-bar-fill" style="width:55%;background:#fb923c"></div></div>
-      </div>
-    </div>
-
-    <!-- 10 Meals -->
-    <div class="section-title">🍽️ Daily Meal Plan (10 Meals)</div>
-    <div class="meal-list">
-
-      <div class="meal-card">
-        <div class="meal-num">1</div>
-        <div class="meal-info">
-          <div class="meal-name">Pre-Workout Oats + Egg Whites</div>
-          <div class="meal-time">6:30 AM · ~45 min before training</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">35g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">52g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">8g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-num">2</div>
-        <div class="meal-info">
-          <div class="meal-name">Intra-Workout: Banana + Electrolytes</div>
-          <div class="meal-time">8:00 AM · Mid-session (optional)</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">2g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">27g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">0g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-num">3</div>
-        <div class="meal-info">
-          <div class="meal-name">Post-Workout Shake: Whey + Dextrose</div>
-          <div class="meal-time">9:00 AM · Within 30 min of training</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">45g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">35g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">3g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-num">4</div>
-        <div class="meal-info">
-          <div class="meal-name">Breakfast: Greek Yogurt + Berries + Granola</div>
-          <div class="meal-time">10:00 AM · First solid meal post-workout</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">22g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">38g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">7g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-num">5</div>
-        <div class="meal-info">
-          <div class="meal-name">Mid-Morning: Cottage Cheese + Rice Cakes</div>
-          <div class="meal-time">12:00 PM · Bridging to lunch</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">25g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">22g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">4g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-num">6</div>
-        <div class="meal-info">
-          <div class="meal-name">Lunch: Chicken Breast + Rice + Broccoli</div>
-          <div class="meal-time">1:30 PM · Primary lunch</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">48g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">45g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">8g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-num">7</div>
-        <div class="meal-info">
-          <div class="meal-name">Afternoon Snack: Hard-Boiled Eggs + Apple</div>
-          <div class="meal-time">4:00 PM · Afternoon energy</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">13g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">25g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">11g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-num">8</div>
-        <div class="meal-info">
-          <div class="meal-name">Dinner: Salmon + Sweet Potato + Asparagus</div>
-          <div class="meal-time">7:00 PM · Main evening meal</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">40g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">35g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">18g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-num">9</div>
-        <div class="meal-info">
-          <div class="meal-name">Evening Snack: PB + Banana + Oat Milk</div>
-          <div class="meal-time">8:30 PM · Satiety buffer</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">10g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">32g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">10g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-      <div class="meal-card">
-        <div class="meal-num">10</div>
-        <div class="meal-info">
-          <div class="meal-name">Before Bed: Casein Protein Shake</div>
-          <div class="meal-time">10:00 PM · Slow-release overnight recovery</div>
-        </div>
-        <div class="meal-macros">
-          <div class="meal-macro macro-p"><span class="mval">30g</span><span class="mlabel">Protein</span></div>
-          <div class="meal-macro macro-c"><span class="mval">6g</span><span class="mlabel">Carbs</span></div>
-          <div class="meal-macro macro-f"><span class="mval">2g</span><span class="mlabel">Fat</span></div>
-        </div>
-      </div>
-
-    </div><!-- /meal-list -->
-
-    <!-- Totals check -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:24px;font-size:0.82rem;color:var(--muted);">
-      <strong style="color:var(--text)">Daily Totals:</strong> 270g P · 317g C · 71g F · ~2,950 kcal (buffer for kitchen variance — adjust protein shake sizes to hit 2,650 exactly)
-    </div>
-
-    <!-- Shopping List -->
-    <div class="section-title">🛒 Weekly Shopping List</div>
-    <div class="shopping-grid">
-      <div class="shop-item"><span>🐔</span> Chicken breast (3 lbs)</div>
-      <div class="shop-item"><span>🐟</span> Salmon fillets (2 lbs)</div>
-      <div class="shop-item"><span>🥚</span> Eggs (2 dozen)</div>
-      <div class="shop-item"><span>🥛</span> Whey protein powder</div>
-      <div class="shop-item"><span>🌙</span> Casein protein powder</div>
-      <div class="shop-item"><span>🍦</span> Greek yogurt (32oz)</div>
-      <div class="shop-item"><span>🧀</span> Cottage cheese (2lb tub)</div>
-      <div class="shop-item"><span>🍚</span> White rice (5 lb bag)</div>
-      <div class="shop-item"><span>🍠</span> Sweet potatoes (4–5)</div>
-      <div class="shop-item"><span>🌾</span> Old-fashioned oats</div>
-      <div class="shop-item"><span>🍌</span> Bananas (bunch)</div>
-      <div class="shop-item"><span>🫐</span> Mixed berries (frozen ok)</div>
-      <div class="shop-item"><span>🥦</span> Broccoli (fresh or frozen)</div>
-      <div class="shop-item"><span>🌱</span> Asparagus</div>
-      <div class="shop-item"><span>🥜</span> Peanut butter (natural)</div>
-      <div class="shop-item"><span>🍎</span> Apples (6–7)</div>
-      <div class="shop-item"><span>🌾</span> Rice cakes</div>
-      <div class="shop-item"><span>🥣</span> Granola (low sugar)</div>
-      <div class="shop-item"><span>🥛</span> Oat milk (1/2 gallon)</div>
-      <div class="shop-item"><span>⚡</span> Electrolyte powder/tabs</div>
-    </div>
-
-    <!-- Prep Strategy -->
-    <div class="section-title">📋 Prep Strategy</div>
-    <div class="prep-steps">
-
-      <div class="prep-step">
-        <div class="prep-icon">🌅</div>
-        <div>
-          <h4>Sunday Meal Prep (2 hours)</h4>
-          <p>Cook 3 lbs chicken breast in bulk (bake at 400°F, 22 min). Make 6 cups rice. Wash and portion broccoli. Hard-boil 8 eggs. Divide into 5-day containers. This covers lunches and most dinners — no daily cooking required.</p>
-        </div>
-      </div>
-
-      <div class="prep-step">
-        <div class="prep-icon">⚡</div>
-        <div>
-          <h4>Pre/Post Workout Simplicity</h4>
-          <p>Pre-workout: overnight oats (5 min the night before — oats + protein powder + almond milk in a jar). Post-workout: whey protein + dextrose (fast carbs) in a shaker — zero prep. Don't overthink the peri-workout window.</p>
-        </div>
-      </div>
-
-      <div class="prep-step">
-        <div class="prep-icon">🎯</div>
-        <div>
-          <h4>The 200g Protein Formula</h4>
-          <p>Chicken breast (30g/4oz) · Salmon (35g/5oz) · Whey scoop (25g) · Casein scoop (30g) · Greek yogurt (17g/cup) · Eggs (6g each) · Cottage cheese (14g/half cup). Hit these daily sources and you'll never miss the target.</p>
-        </div>
-      </div>
-
-      <div class="prep-step">
-        <div class="prep-icon">💧</div>
-        <div>
-          <h4>Hydration Protocol</h4>
-          <p>1 gallon water minimum on training days. Add electrolytes post-workout, especially in summer. Creatine (5g/day) can be added to post-workout shake — no loading phase needed, just consistent daily dosing.</p>
-        </div>
-      </div>
-
-      <div class="prep-step">
-        <div class="prep-icon">🔄</div>
-        <div>
-          <h4>Rest Day Adjustments</h4>
-          <p>On rest days, drop carbs by ~50–75g (remove the intra-workout banana and reduce rice portions). Protein stays the same. Fat and vegetables can increase slightly to fill the calorie gap. Total rest day target: ~2,300 kcal.</p>
-        </div>
-      </div>
-
-    </div>
-
-  </div><!-- /tab-nutrition -->
-
-  <!-- ═══════════════════════ ABOUT TAB ═══════════════════════ -->
-  <div id="tab-about" class="tab-panel">
-    <div class="about-section">
-
-      <div class="about-card">
-        <h3>🏗️ Program Design</h3>
-        <p>This 5-day split is built around three priorities: maximizing muscle development using PE-safe movement patterns, correcting rhomboid weakness through targeted rehab, and activating the serratus anterior to improve posture and shoulder girdle stability.</p>
-        <div class="highlight-box">
-          <p><strong>Why PE-Safe Matters:</strong> Pectus excavatum creates a concave sternum that makes flat barbell bench press uncomfortable and potentially unsafe (increased sternal pressure). All pressing is done incline, which shifts load to the clavicular head of the pec while eliminating sternal contact.</p>
-        </div>
-      </div>
-
-      <div class="about-card">
-        <h3>📆 Weekly Split Overview</h3>
-        <table class="split-table">
-          <thead>
-            <tr>
-              <th>Day</th>
-              <th>Focus</th>
-              <th>Key Emphasis</th>
-              <th>Duration</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="day-dot" style="background:#4f8ef7"></span>Day 1</td>
-              <td>Push / Serratus</td>
-              <td>Incline press, protraction drills</td>
-              <td>~50 min</td>
-            </tr>
-            <tr>
-              <td><span class="day-dot" style="background:#a78bfa"></span>Day 2</td>
-              <td>Pull / Rhomboid</td>
-              <td>Y-raises, face pulls, scapular control</td>
-              <td>~45 min</td>
-            </tr>
-            <tr>
-              <td><span class="day-dot" style="background:#22c55e"></span>Day 3</td>
-              <td>Legs + Core</td>
-              <td>Compound leg work, anti-rotation core</td>
-              <td>~55 min</td>
-            </tr>
-            <tr>
-              <td><span class="day-dot" style="background:#eab308"></span>Day 4</td>
-              <td>Shoulders</td>
-              <td>All three delt heads, rear delt rehab</td>
-              <td>~45 min</td>
-            </tr>
-            <tr>
-              <td><span class="day-dot" style="background:#ef4444"></span>Day 5</td>
-              <td>Back + Biceps</td>
-              <td>Heavy rows, arm isolation</td>
-              <td>~40 min</td>
-            </tr>
-            <tr>
-              <td><span class="day-dot" style="background:#475569"></span>Day 6–7</td>
-              <td>Rest / Active Recovery</td>
-              <td>Walking, stretching, foam rolling</td>
-              <td>Optional</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="about-card">
-        <h3>🩺 Rhomboid Rehab Protocol</h3>
-        <p>Weak rhomboids (the muscles between your shoulder blades) are extremely common and lead to rounded shoulders, neck pain, and poor posture. This program addresses them with a four-pronged approach:</p>
-        <ul style="margin-top: 10px;">
-          <li><strong>Face Pulls (Day 2, 4×15):</strong> The gold-standard corrective for scapular retraction + external rotation</li>
-          <li><strong>Y-Raises / Reverse Fly (Day 2, 4×15):</strong> Direct lower trap + rhomboid isolation with thumbs-up cue</li>
-          <li><strong>Scapular Pull-Ups (Day 4, 3×12):</strong> Teaches proper scapular depression under load</li>
-          <li><strong>Seated Cable Row Technique (Day 2):</strong> Full protraction → retraction ROM retrains scapular movement pattern</li>
-        </ul>
-      </div>
-
-      <div class="about-card">
-        <h3>🫁 Serratus Anterior Activation</h3>
-        <p>The serratus anterior ("boxer's muscle") protracts the scapula and holds the shoulder blade flat against the rib cage. In PE, this muscle is often inhibited due to anatomical constraints. Targeted activation:</p>
-        <ul style="margin-top: 10px;">
-          <li><strong>Plus Push-Up / Push-Up to Side Plank (Day 1):</strong> The extra protraction at the top of a push-up is the most direct serratus exercise in existence</li>
-          <li><strong>Incline Cable Fly (Day 1):</strong> Active protraction squeeze at the top of each rep</li>
-          <li><strong>Low Cable Crossover (Day 1):</strong> High-arc protraction motion</li>
-          <li><strong>Plank with Active Push (Day 3):</strong> Isometric serratus loading</li>
-        </ul>
-      </div>
-
-      <div class="about-card">
-        <h3>📊 Progressive Overload</h3>
-        <p>Follow this progression model to ensure continuous adaptation:</p>
-        <ol style="margin-top: 10px;">
-          <li><strong>Weeks 1–2:</strong> Learn the movements. Use conservative weights. Focus 100% on form cues.</li>
-          <li><strong>Weeks 3–4:</strong> Add 5–10 lbs to compounds weekly; 2.5 lbs to isolations when all reps feel easy</li>
-          <li><strong>Week 5:</strong> Deload — drop weight 40%, same reps. Let connective tissue recover.</li>
-          <li><strong>Repeat cycle:</strong> Strength builds in the recovery, not the workout. Deloads are not optional.</li>
-        </ol>
-      </div>
-
-      <div class="about-card">
-        <h3>ℹ️ About This Program</h3>
-        <p>Built for Phil Wood. Dark-themed, mobile-first, PE-safe. Exercise demonstrations sourced from <strong>free-exercise-db</strong> (yuhonas/free-exercise-db, MIT license) — accurate two-frame anatomical illustrations for every exercise. All 26 exercises manually verified for correct movement patterns.</p>
-        <p style="margin-top: 8px; font-size: 0.78rem; color: var(--muted);">Tap the ▶ button on any exercise card to animate the demonstration. Tap again to pause. Form cues expand inline.</p>
-      </div>
-
-    </div>
-  </div><!-- /tab-about -->
-
-</div><!-- /main -->
+<div id="tab1" class="tab-content active">
+<div class="week-grid">
+<div class="day-card">
+<div class="day-name">Monday</div>
+<div class="day-focus">Chest + Shoulders</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Incline DB Press</span><span class="ex-sets">4×8-10</span>
+<div class="ex-gif"><img src="https://i.pinimg.com/originals/9c/6c/f5/9c6cf5cc9cf8c8e1bb8c8b8e3c8e3c8e.gif"></div>
+<div class="ex-cue">Builds upper chest. Elbows 45°. Press up and inward.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Overhead Press</span><span class="ex-sets">4×6-8</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/AgedGiddyAntipodesgreenparakeet-max-1mb.gif"></div>
+<div class="ex-cue">Press straight up. Core tight. Builds shoulder width.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Lateral Raises</span><span class="ex-sets">3×12-15</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/FrighteningAdmiredCockatiel-size_restricted.gif"></div>
+<div class="ex-cue">Lead with elbows. Pause at top.</div>
+</div>
+</div>
+
+<div class="day-card">
+<div class="day-name">Tuesday</div>
+<div class="day-focus">Back + Rear Delts</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Pull-Ups</span><span class="ex-sets">4×8-10</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/AmusingUnsightlyBorderterrier-max-1mb.gif"></div>
+<div class="ex-cue">Chest to bar. Builds V-taper for pectus offset.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Barbell Rows</span><span class="ex-sets">4×8-10</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/OddballNeglectedGnatcatcher-max-1mb.gif"></div>
+<div class="ex-cue">Pull to lower chest. Retract shoulder blades.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Face Pulls</span><span class="ex-sets">3×15-20</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/FragrantThankfulAntipodesgreenparakeet-max-1mb.gif"></div>
+<div class="ex-cue">Critical for posture. Pull to face. Rotate externally.</div>
+</div>
+</div>
+
+<div class="day-card">
+<div class="day-name">Wednesday</div>
+<div class="day-focus">Legs + Core</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Squats</span><span class="ex-sets">4×8-10</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/BoringDifferentCaimanlizard-max-1mb.gif"></div>
+<div class="ex-cue">Chest up. Depth to parallel. Braces entire core.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Romanian Deadlifts</span><span class="ex-sets">3×10-12</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/HospitableEasygoingFirecrest-max-1mb.gif"></div>
+<div class="ex-cue">Hinge at hips. Feel hamstring stretch.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Hanging Leg Raises</span><span class="ex-sets">3×12-15</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/QuestionableJampackedIlladopsis-max-1mb.gif"></div>
+<div class="ex-cue">Lift knees to chest. Supports rib cage.</div>
+</div>
+</div>
+
+<div class="day-card">
+<div class="day-name">Thursday</div>
+<div class="day-focus">Rest Day</div>
+<p style="color:var(--muted);padding:12px">20-30min walk or light cardio. Foam roll shoulders/back.</p>
+</div>
+
+<div class="day-card">
+<div class="day-name">Friday</div>
+<div class="day-focus">Upper Power</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Weighted Pull-Ups</span><span class="ex-sets">4×5-6</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/AmusingUnsightlyBorderterrier-max-1mb.gif"></div>
+<div class="ex-cue">Add weight. Heavy strength work.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Arnold Press</span><span class="ex-sets">4×8-10</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/ThankfulSlimyAnkole-max-1mb.gif"></div>
+<div class="ex-cue">Rotate as you press. Builds round shoulders.</div>
+</div>
+</div>
+
+<div class="day-card">
+<div class="day-name">Saturday</div>
+<div class="day-focus">Arms + Core</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Barbell Curls</span><span class="ex-sets">3×10-12</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/ChillySlimIberianmidwifetoad-max-1mb.gif"></div>
+<div class="ex-cue">Elbows locked at sides. Full ROM.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Tricep Extensions</span><span class="ex-sets">3×10-12</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/BlueGlamorousGermanshorthairedpointer-max-1mb.gif"></div>
+<div class="ex-cue">Elbows close to head. Full lockout.</div>
+</div>
+<div class="ex" onclick="this.classList.toggle('open')">
+<span class="ex-name">Cable Crunches</span><span class="ex-sets">3×15-20</span>
+<div class="ex-gif"><img src="https://thumbs.gfycat.com/FatImaginativeGoldfish-max-1mb.gif"></div>
+<div class="ex-cue">Pull elbows to knees. Curl spine.</div>
+</div>
+</div>
+
+<div class="day-card">
+<div class="day-name">Sunday</div>
+<div class="day-focus">Full Rest</div>
+<p style="color:var(--muted);padding:12px">Sleep 8+ hours. Eat at maintenance or slight surplus.</p>
+</div>
+
+</div>
+</div>
+
+<div id="tab2" class="tab-content">
+<div class="dir-grid">
+
+<div class="dir-card">
+<div class="dir-gif"><img src="https://thumbs.gfycat.com/AgedGiddyAntipodesgreenparakeet-max-1mb.gif"></div>
+<div class="dir-body">
+<div class="dir-name">Overhead Press</div>
+<p>Shoulders. Press straight up. Core tight.</p>
+</div>
+</div>
+
+<div class="dir-card">
+<div class="dir-gif"><img src="https://thumbs.gfycat.com/FrighteningAdmiredCockatiel-size_restricted.gif"></div>
+<div class="dir-body">
+<div class="dir-name">Lateral Raises</div>
+<p>Shoulders. Builds width. Lead with elbows.</p>
+</div>
+</div>
+
+<div class="dir-card">
+<div class="dir-gif"><img src="https://thumbs.gfycat.com/AmusingUnsightlyBorderterrier-max-1mb.gif"></div>
+<div class="dir-body">
+<div class="dir-name">Pull-Ups</div>
+<p>Back. Chest to bar. Builds V-taper.</p>
+</div>
+</div>
+
+<div class="dir-card">
+<div class="dir-gif"><img src="https://thumbs.gfycat.com/OddballNeglectedGnatcatcher-max-1mb.gif"></div>
+<div class="dir-body">
+<div class="dir-name">Barbell Rows</div>
+<p>Back. Pull to chest. Retract shoulder blades.</p>
+</div>
+</div>
+
+<div class="dir-card">
+<div class="dir-gif"><img src="https://thumbs.gfycat.com/FragrantThankfulAntipodesgreenparakeet-max-1mb.gif"></div>
+<div class="dir-body">
+<div class="dir-name">Face Pulls</div>
+<p>Rear Delts. Critical for posture.</p>
+</div>
+</div>
+
+<div class="dir-card">
+<div class="dir-gif"><img src="https://thumbs.gfycat.com/QuestionableJampackedIlladopsis-max-1mb.gif"></div>
+<div class="dir-body">
+<div class="dir-name">Hanging Leg Raises</div>
+<p>Abs. Supports rib cage.</p>
+</div>
+</div>
+
+<div class="dir-card">
+<div class="dir-gif"><img src="https://thumbs.gfycat.com/BoringDifferentCaimanlizard-max-1mb.gif"></div>
+<div class="dir-body">
+<div class="dir-name">Squats</div>
+<p>Legs/Core. Chest up. Depth to parallel.</p>
+</div>
+</div>
+
+<div class="dir-card">
+<div class="dir-gif"><img src="https://i.pinimg.com/originals/9c/6c/f5/9c6cf5cc9cf8c8e1bb8c8b8e3c8e3c8e.gif"></div>
+<div class="dir-body">
+<div class="dir-name">Incline DB Press</div>
+<p>Chest. Builds upper chest for pectus.</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div id="tab3" class="tab-content">
+<div class="meal-grid">
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🥣 Overnight Oats</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>1 cup oats</li>
+<li>1 scoop protein powder</li>
+<li>1 cup milk</li>
+<li>1 tbsp peanut butter</li>
+<li>Frozen berries</li>
+</ul>
+<h4>Prep</h4>
+<p>Mix in jar. Refrigerate overnight. Grab and eat cold. No cooking.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🍗 Rotisserie Chicken Bowl</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Store rotisserie chicken (shred it)</li>
+<li>Microwave rice pouches (90 sec)</li>
+<li>Frozen mixed veggies (steam bag)</li>
+<li>Soy sauce or teriyaki</li>
+</ul>
+<h4>Prep</h4>
+<p>Microwave rice (90 sec). Microwave veggies (3-4 min). Shred chicken. Mix. Add sauce. Done in 5 min.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🥄 Greek Yogurt Parfait</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>2 cups Greek yogurt</li>
+<li>1/2 cup granola</li>
+<li>Frozen berries</li>
+<li>Honey</li>
+</ul>
+<h4>Prep</h4>
+<p>Layer yogurt, granola, berries. Drizzle honey. No cooking. High protein.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🥤 Protein Shake</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>2 scoops protein powder</li>
+<li>1 cup milk</li>
+<li>1 banana</li>
+<li>2 tbsp peanut butter</li>
+<li>Ice</li>
+</ul>
+<h4>Prep</h4>
+<p>Blend 30-60 sec. Drink. ~600-800 cal. Perfect post-workout.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🌯 Frozen Burrito Bowl</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Frozen burrito bowl (Trader Joe's, Evol)</li>
+<li>Shredded cheese</li>
+<li>Greek yogurt (sour cream sub)</li>
+<li>Hot sauce</li>
+</ul>
+<h4>Prep</h4>
+<p>Microwave bowl (4-5 min). Top with cheese, yogurt, hot sauce. Done.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🥜 PB Banana Sandwich</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>2 slices whole grain bread</li>
+<li>3 tbsp peanut butter</li>
+<li>1 banana (sliced)</li>
+<li>Honey</li>
+</ul>
+<h4>Prep</h4>
+<p>Spread PB on bread. Add banana slices. Drizzle honey. Close. Eat. No cooking.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🐟 Tuna + Crackers</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>1 can tuna (drained)</li>
+<li>1 tbsp mayo or Greek yogurt</li>
+<li>Whole grain crackers</li>
+<li>Hot sauce</li>
+</ul>
+<h4>Prep</h4>
+<p>Drain tuna. Mix with mayo/yogurt in can. Scoop onto crackers. Eat.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🍕 Frozen Pizza + Salad</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Frozen pizza</li>
+<li>Bag of pre-washed salad</li>
+<li>Bottled dressing</li>
+</ul>
+<h4>Prep</h4>
+<p>Bake pizza (12-15 min at 400°F). While it bakes, dump salad in bowl with dressing. Eat.</p>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 
 <script>
-// ─── TABS ───
-function switchTab(name) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  event.target.classList.add('active');
+function switchTab(n){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn')[n-1].classList.add('active');
+  document.getElementById('tab'+n).classList.add('active');
 }
-
-// ─── DAYS ───
-function switchDay(n) {
-  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('day-' + n).classList.add('active');
-  event.target.classList.add('active');
-  // Pause all animations when switching days
-  document.querySelectorAll('.ex-img-wrap.animating').forEach(w => {
-    w.classList.remove('animating');
-    const overlay = w.querySelector('.play-overlay');
-    if (overlay) overlay.style.display = '';
-  });
-}
-
-// ─── ANIMATION ───
-function startAnim(id) {
-  const wrap = document.getElementById(id);
-  if (!wrap) return;
-  wrap.classList.add('animating');
-  const overlay = wrap.querySelector('.play-overlay');
-  if (overlay) overlay.style.display = 'none';
-}
-
-// ─── FORM CUES ───
-function toggleCues(btn) {
-  const content = btn.nextElementSibling;
-  const isOpen = content.classList.contains('open');
-  content.classList.toggle('open');
-  btn.querySelector('span').textContent = isOpen ? '▾' : '▴';
-}
-
-// ─── WEEK TRACKER ───
-function toggleDay(n) {
-  const dot = document.getElementById('wd' + n);
-  if (dot) dot.classList.toggle('done');
-  saveTracker();
-}
-
-function saveTracker() {
-  const state = {};
-  for (let i = 1; i <= 7; i++) {
-    const d = document.getElementById('wd' + i);
-    if (d) state[i] = d.classList.contains('done');
-  }
-  try { localStorage.setItem('tracker', JSON.stringify(state)); } catch(e) {}
-}
-
-function loadTracker() {
-  try {
-    const state = JSON.parse(localStorage.getItem('tracker') || '{}');
-    for (let i = 1; i <= 7; i++) {
-      const d = document.getElementById('wd' + i);
-      if (d && state[i]) d.classList.add('done');
-    }
-  } catch(e) {}
-}
-
-// Init
-loadTracker();
 </script>
-</body>
-</html>
+</body></html>
