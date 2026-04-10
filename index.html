@@ -87,6 +87,78 @@ body{
 .tab-content{display:none}
 .tab-content.active{display:block}
 
+/* Weekly Calendar */
+.weekly-calendar{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+.day-card{
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  padding:20px;
+  transition:all 0.3s;
+}
+.day-card:hover{
+  border-color:var(--accent);
+  box-shadow:0 8px 32px var(--accent-glow);
+}
+.day-header{
+  font-size:1.3em;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:6px;
+}
+.day-subtitle{
+  font-size:0.8em;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:16px;
+}
+.day-exercises{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.cal-ex{
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:10px;
+  padding:12px;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.cal-ex:hover{
+  background:rgba(255,255,255,0.04);
+  border-color:var(--accent);
+}
+.cal-ex-header{
+  display:flex;
+  justify-content:space-between;
+  font-size:0.9em;
+  font-weight:600;
+}
+.cal-sets{
+  color:var(--accent);
+  font-size:0.85em;
+}
+.cal-ex-video{
+  display:none;
+  margin-top:10px;
+  border-radius:8px;
+  overflow:hidden;
+}
+.cal-ex.open .cal-ex-video{display:block}
+.rest-note{
+  color:var(--muted);
+  font-size:0.9em;
+  padding:12px 0;
+}
+
+/* Bento Grid (Exercise Library) */
 .bento-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
@@ -174,6 +246,45 @@ body{
 }
 .ex.open .ex-cue{display:block}
 
+/* Shopping Grid */
+.section-title{
+  font-size:1.6em;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:24px;
+  text-align:center;
+}
+.shopping-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:16px;
+  margin-bottom:48px;
+}
+.shopping-item{
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:16px;
+  padding:16px;
+  transition:all 0.3s;
+}
+.shopping-item:hover{
+  border-color:var(--accent);
+  box-shadow:0 4px 20px var(--accent-glow);
+}
+.item-name{
+  font-weight:700;
+  color:var(--text);
+  font-size:0.95em;
+  margin-bottom:6px;
+}
+.item-desc{
+  font-size:0.8em;
+  color:var(--muted);
+  line-height:1.4;
+}
+
+/* Meal Grid */
 .meal-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
@@ -224,7 +335,7 @@ body{
 }
 
 @media(max-width:640px){
-  .bento-grid,.meal-grid{grid-template-columns:1fr}
+  .bento-grid,.meal-grid,.shopping-grid,.weekly-calendar{grid-template-columns:1fr}
   .header h1{font-size:2em}
 }
 </style>
@@ -237,13 +348,138 @@ body{
 </div>
 
 <div class="tabs">
-<button class="tab-btn active" onclick="switchTab(1)">Exercise Library</button>
-<button class="tab-btn" onclick="switchTab(2)">Meal Shortcuts</button>
+<button class="tab-btn active" onclick="switchTab(1)">Weekly Plan</button>
+<button class="tab-btn" onclick="switchTab(2)">Exercise Library</button>
+<button class="tab-btn" onclick="switchTab(3)">Meal Shortcuts</button>
 </div>
 
 <div id="tab1" class="tab-content active">
-<div class="bento-grid">
+<div class="weekly-calendar">
+<div class="day-card">
+<div class="day-header">Monday</div>
+<div class="day-subtitle">Upper Chest + Shoulders</div>
+<div class="day-exercises">
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Incline Barbell Press</span><span class="cal-sets">4×8-10</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/SrqOu55lrYU?autoplay=1&loop=1&mute=1&controls=0&playlist=SrqOu55lrYU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Incline Dumbbell Press</span><span class="cal-sets">3×10-12</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/PiJQPOiMua4?autoplay=1&loop=1&mute=1&controls=0&playlist=PiJQPOiMua4" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Overhead Barbell Press</span><span class="cal-sets">4×6-8</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/0fJbmb7wKjU?autoplay=1&loop=1&mute=1&controls=0&playlist=0fJbmb7wKjU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Lateral Raises</span><span class="cal-sets">3×12-15</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/3VcKaXg5f9I?autoplay=1&loop=1&mute=1&controls=0&playlist=3VcKaXg5f9I" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+</div>
+</div>
+<div class="day-card">
+<div class="day-header">Tuesday</div>
+<div class="day-subtitle">Lats + Upper Back</div>
+<div class="day-exercises">
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Weighted Pull-Ups</span><span class="cal-sets">4×8-10</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/eGo4IYlbE5g?autoplay=1&loop=1&mute=1&controls=0&playlist=eGo4IYlbE5g" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>T-Bar Row</span><span class="cal-sets">4×8-10</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/j3Igk5nyZE4?autoplay=1&loop=1&mute=1&controls=0&playlist=j3Igk5nyZE4" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Lat Pulldown</span><span class="cal-sets">3×10-12</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/CAwf7n6Ep-s?autoplay=1&loop=1&mute=1&controls=0&playlist=CAwf7n6Ep-s" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Face Pull</span><span class="cal-sets">3×15-20</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/rep-4eQVd6c?autoplay=1&loop=1&mute=1&controls=0&playlist=rep-4eQVd6c" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+</div>
+</div>
+<div class="day-card">
+<div class="day-header">Wednesday</div>
+<div class="day-subtitle">Serratus + Core</div>
+<div class="day-exercises">
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Push-Up Plus</span><span class="cal-sets">3×12-15</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/mJKJmVeWOVU?autoplay=1&loop=1&mute=1&controls=0&playlist=mJKJmVeWOVU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Dumbbell Pullover</span><span class="cal-sets">3×10-12</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/FK7XoTp3-vI?autoplay=1&loop=1&mute=1&controls=0&playlist=FK7XoTp3-vI" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Ab Wheel Rollout</span><span class="cal-sets">3×8-10</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/QGHBgP6pBaU?autoplay=1&loop=1&mute=1&controls=0&playlist=QGHBgP6pBaU" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Hanging Leg Raises</span><span class="cal-sets">3×12-15</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/Pr1ieGZ5atk?autoplay=1&loop=1&mute=1&controls=0&playlist=Pr1ieGZ5atk" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+</div>
+</div>
+<div class="day-card">
+<div class="day-header">Thursday</div>
+<div class="day-subtitle">Rest / Light Cardio</div>
+<p class="rest-note">Recovery day. Light walk or foam rolling.</p>
+</div>
+<div class="day-card">
+<div class="day-header">Friday</div>
+<div class="day-subtitle">Chest + Lats (Volume)</div>
+<div class="day-exercises">
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Flat Barbell Bench Press</span><span class="cal-sets">4×6-8</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/gRVjAtPip0Y?autoplay=1&loop=1&mute=1&controls=0&playlist=gRVjAtPip0Y" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Weighted Dips</span><span class="cal-sets">3×8-10</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/2z8JmcrW-As?autoplay=1&loop=1&mute=1&controls=0&playlist=2z8JmcrW-As" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Straight-Arm Pulldown</span><span class="cal-sets">3×12-15</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/okkeD9n_BQM?autoplay=1&loop=1&mute=1&controls=0&playlist=okkeD9n_BQM" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Cable Crunches</span><span class="cal-sets">3×15-20</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/sEqEOJCwIzI?autoplay=1&loop=1&mute=1&controls=0&playlist=sEqEOJCwIzI" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+</div>
+</div>
+<div class="day-card">
+<div class="day-header">Saturday</div>
+<div class="day-subtitle">Shoulders + Back</div>
+<div class="day-exercises">
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Arnold Press</span><span class="cal-sets">3×8-10</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/6Z15_WdXmVw?autoplay=1&loop=1&mute=1&controls=0&playlist=6Z15_WdXmVw" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Cable Lateral Raises</span><span class="cal-sets">3×12-15</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/kDqklk1ZESo?autoplay=1&loop=1&mute=1&controls=0&playlist=kDqklk1ZESo" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Seated Cable Row</span><span class="cal-sets">3×10-12</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/UCXxvVItLoM?autoplay=1&loop=1&mute=1&controls=0&playlist=UCXxvVItLoM" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+<div class="cal-ex" onclick="this.classList.toggle('open')">
+<div class="cal-ex-header"><span>Reverse Pec Deck Fly</span><span class="cal-sets">3×12-15</span></div>
+<div class="cal-ex-video"><iframe width="100%" height="160" src="https://www.youtube.com/embed/ea7KoHB8wfY?autoplay=1&loop=1&mute=1&controls=0&playlist=ea7KoHB8wfY" frameborder="0" allow="autoplay" allowfullscreen></iframe></div>
+</div>
+</div>
+</div>
+<div class="day-card">
+<div class="day-header">Sunday</div>
+<div class="day-subtitle">Full Rest</div>
+<p class="rest-note">Recovery day. Light walk or foam rolling.</p>
+</div>
+</div>
+</div>
 
+<div id="tab2" class="tab-content">
+<div class="bento-grid">
 <div class="bento-card">
 <div class="day-name">Upper Chest</div>
 <div class="day-focus">Pectus Support Program</div>
@@ -499,11 +735,43 @@ body{
 <div class="ex-cue">Already listed above. High priority.</div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 
-<div id="tab2" class="tab-content">
+<div id="tab3" class="tab-content">
+<div class="section-title">🛒 Shopping List (No-Cook Essentials)</div>
+<div class="shopping-grid">
+<div class="shopping-item"><div class="item-name">Frozen Vegetables</div><div class="item-desc">Broccoli, spinach, mixed veggies. Microwave-ready.</div></div>
+<div class="shopping-item"><div class="item-name">Rotisserie Chicken</div><div class="item-desc">Pre-cooked protein. Shred for bowls/wraps.</div></div>
+<div class="shopping-item"><div class="item-name">Greek Yogurt</div><div class="item-desc">High protein, low sugar. Plain or vanilla.</div></div>
+<div class="shopping-item"><div class="item-name">Protein Powder</div><div class="item-desc">Whey or plant-based. For shakes/oats.</div></div>
+<div class="shopping-item"><div class="item-name">Eggs</div><div class="item-desc">Microwave scrambles. Hard boil in batches.</div></div>
+<div class="shopping-item"><div class="item-name">Rice Pouches</div><div class="item-desc">90-second microwave rice. Instant carbs.</div></div>
+<div class="shopping-item"><div class="item-name">Pasta</div><div class="item-desc">Boil in 8-10 min. Pair with jar sauce.</div></div>
+<div class="shopping-item"><div class="item-name">Jar Marinara</div><div class="item-desc">No-cook pasta sauce. Add to anything.</div></div>
+<div class="shopping-item"><div class="item-name">Canned Tuna</div><div class="item-desc">Protein. Mix with mayo, crackers.</div></div>
+<div class="shopping-item"><div class="item-name">Deli Turkey</div><div class="item-desc">Pre-sliced. Wraps, sandwiches.</div></div>
+<div class="shopping-item"><div class="item-name">Pre-Shredded Cheese</div><div class="item-desc">Skip grating. Add to everything.</div></div>
+<div class="shopping-item"><div class="item-name">Tortillas</div><div class="item-desc">Wraps, quesadillas. No cooking.</div></div>
+<div class="shopping-item"><div class="item-name">Frozen Meatballs</div><div class="item-desc">Microwave protein. Add to pasta.</div></div>
+<div class="shopping-item"><div class="item-name">Oats</div><div class="item-desc">Overnight oats. No cooking required.</div></div>
+<div class="shopping-item"><div class="item-name">Peanut Butter</div><div class="item-desc">Calories + protein. Shakes, toast.</div></div>
+<div class="shopping-item"><div class="item-name">Bananas</div><div class="item-desc">Fast carbs. Shakes, snacks.</div></div>
+<div class="shopping-item"><div class="item-name">Bagged Salad Mix</div><div class="item-desc">Pre-washed. Zero prep.</div></div>
+<div class="shopping-item"><div class="item-name">Granola</div><div class="item-desc">Yogurt topping. Quick calories.</div></div>
+<div class="shopping-item"><div class="item-name">Bottled Dressing</div><div class="item-desc">Ranch, Caesar, Italian. Instant flavor.</div></div>
+<div class="shopping-item"><div class="item-name">Bread/Bagels</div><div class="item-desc">Toast, sandwiches. Freeze extras.</div></div>
+<div class="shopping-item"><div class="item-name">Frozen Berries</div><div class="item-desc">Oats, yogurt, shakes.</div></div>
+<div class="shopping-item"><div class="item-name">Hummus</div><div class="item-desc">Dip veggies, spread on wraps.</div></div>
+<div class="shopping-item"><div class="item-name">Cottage Cheese</div><div class="item-desc">High protein snack.</div></div>
+<div class="shopping-item"><div class="item-name">String Cheese</div><div class="item-desc">Portable protein.</div></div>
+<div class="shopping-item"><div class="item-name">Crackers</div><div class="item-desc">Pair with tuna, cheese.</div></div>
+<div class="shopping-item"><div class="item-name">Applesauce</div><div class="item-desc">Easy carbs.</div></div>
+<div class="shopping-item"><div class="item-name">Instant Oatmeal</div><div class="item-desc">Microwave breakfast.</div></div>
+<div class="shopping-item"><div class="item-name">Beef Jerky</div><div class="item-desc">High protein snack.</div></div>
+</div>
+
+<div class="section-title" style="margin-top:60px">🍽️ Easy Meal Recipes</div>
 <div class="meal-grid">
 
 <div class="meal" onclick="this.classList.toggle('open')">
@@ -627,6 +895,35 @@ body{
 </ul>
 <h4>Prep</h4>
 <p>Dump salad in bowl. Add toppings. Pour dressing. No cooking at all.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🌯 Quesadilla</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>2 tortillas</li>
+<li>Pre-shredded cheese</li>
+<li>Optional: deli meat, canned beans</li>
+</ul>
+<h4>Prep</h4>
+<p>Layer cheese between tortillas. Microwave 60-90 sec until cheese melts. Cut into wedges.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🥫 Tuna + Crackers</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>1 can tuna (drained)</li>
+<li>2 tbsp mayo</li>
+<li>Crackers</li>
+<li>Optional: hot sauce, pickle relish</li>
+</ul>
+<h4>Prep</h4>
+<p>Mix tuna + mayo. Scoop onto crackers. High protein, zero cooking.</p>
 </div>
 </div>
 
