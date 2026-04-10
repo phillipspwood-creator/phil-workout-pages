@@ -338,6 +338,40 @@ body{
   .bento-grid,.meal-grid,.shopping-grid,.weekly-calendar{grid-template-columns:1fr}
   .header h1{font-size:2em}
 }
+
+/* Category Shopping List */
+.category-section{
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:20px;
+  transition:all 0.3s;
+}
+.category-section:hover{
+  border-color:var(--accent);
+  box-shadow:0 8px 32px var(--accent-glow);
+}
+.category-name{
+  font-size:1.2em;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:16px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.category-items{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:8px;
+}
+.shopping-item-simple{
+  color:var(--text);
+  font-size:0.9em;
+  padding:4px 0;
+}
+
 </style>
 </head><body>
 <div class="container">
@@ -739,37 +773,194 @@ body{
 </div>
 
 <div id="tab3" class="tab-content">
-<div class="section-title">🛒 Shopping List (No-Cook Essentials)</div>
-<div class="shopping-grid">
-<div class="shopping-item"><div class="item-name">Frozen Vegetables</div><div class="item-desc">Broccoli, spinach, mixed veggies. Microwave-ready.</div></div>
-<div class="shopping-item"><div class="item-name">Rotisserie Chicken</div><div class="item-desc">Pre-cooked protein. Shred for bowls/wraps.</div></div>
-<div class="shopping-item"><div class="item-name">Greek Yogurt</div><div class="item-desc">High protein, low sugar. Plain or vanilla.</div></div>
-<div class="shopping-item"><div class="item-name">Protein Powder</div><div class="item-desc">Whey or plant-based. For shakes/oats.</div></div>
-<div class="shopping-item"><div class="item-name">Eggs</div><div class="item-desc">Microwave scrambles. Hard boil in batches.</div></div>
-<div class="shopping-item"><div class="item-name">Rice Pouches</div><div class="item-desc">90-second microwave rice. Instant carbs.</div></div>
-<div class="shopping-item"><div class="item-name">Pasta</div><div class="item-desc">Boil in 8-10 min. Pair with jar sauce.</div></div>
-<div class="shopping-item"><div class="item-name">Jar Marinara</div><div class="item-desc">No-cook pasta sauce. Add to anything.</div></div>
-<div class="shopping-item"><div class="item-name">Canned Tuna</div><div class="item-desc">Protein. Mix with mayo, crackers.</div></div>
-<div class="shopping-item"><div class="item-name">Deli Turkey</div><div class="item-desc">Pre-sliced. Wraps, sandwiches.</div></div>
-<div class="shopping-item"><div class="item-name">Pre-Shredded Cheese</div><div class="item-desc">Skip grating. Add to everything.</div></div>
-<div class="shopping-item"><div class="item-name">Tortillas</div><div class="item-desc">Wraps, quesadillas. No cooking.</div></div>
-<div class="shopping-item"><div class="item-name">Frozen Meatballs</div><div class="item-desc">Microwave protein. Add to pasta.</div></div>
-<div class="shopping-item"><div class="item-name">Oats</div><div class="item-desc">Overnight oats. No cooking required.</div></div>
-<div class="shopping-item"><div class="item-name">Peanut Butter</div><div class="item-desc">Calories + protein. Shakes, toast.</div></div>
-<div class="shopping-item"><div class="item-name">Bananas</div><div class="item-desc">Fast carbs. Shakes, snacks.</div></div>
-<div class="shopping-item"><div class="item-name">Bagged Salad Mix</div><div class="item-desc">Pre-washed. Zero prep.</div></div>
-<div class="shopping-item"><div class="item-name">Granola</div><div class="item-desc">Yogurt topping. Quick calories.</div></div>
-<div class="shopping-item"><div class="item-name">Bottled Dressing</div><div class="item-desc">Ranch, Caesar, Italian. Instant flavor.</div></div>
-<div class="shopping-item"><div class="item-name">Bread/Bagels</div><div class="item-desc">Toast, sandwiches. Freeze extras.</div></div>
-<div class="shopping-item"><div class="item-name">Frozen Berries</div><div class="item-desc">Oats, yogurt, shakes.</div></div>
-<div class="shopping-item"><div class="item-name">Hummus</div><div class="item-desc">Dip veggies, spread on wraps.</div></div>
-<div class="shopping-item"><div class="item-name">Cottage Cheese</div><div class="item-desc">High protein snack.</div></div>
-<div class="shopping-item"><div class="item-name">String Cheese</div><div class="item-desc">Portable protein.</div></div>
-<div class="shopping-item"><div class="item-name">Crackers</div><div class="item-desc">Pair with tuna, cheese.</div></div>
-<div class="shopping-item"><div class="item-name">Applesauce</div><div class="item-desc">Easy carbs.</div></div>
-<div class="shopping-item"><div class="item-name">Instant Oatmeal</div><div class="item-desc">Microwave breakfast.</div></div>
-<div class="shopping-item"><div class="item-name">Beef Jerky</div><div class="item-desc">High protein snack.</div></div>
+<div class="section-title">🛒 Grocery List</div>
+
+<div class="category-section">
+<div class="category-name">Protein</div>
+<div class="category-items">
+<div class="shopping-item-simple">• Rotisserie chicken</div>
+<div class="shopping-item-simple">• Pre-cooked grilled chicken strips</div>
+<div class="shopping-item-simple">• 93-99% lean ground turkey</div>
+<div class="shopping-item-simple">• Eggs</div>
+<div class="shopping-item-simple">• Liquid egg whites</div>
+<div class="shopping-item-simple">• Nonfat Greek yogurt</div>
+<div class="shopping-item-simple">• Low-fat cottage cheese</div>
+<div class="shopping-item-simple">• Canned tuna</div>
+<div class="shopping-item-simple">• Canned salmon</div>
+<div class="shopping-item-simple">• Frozen shrimp</div>
+<div class="shopping-item-simple">• Protein powder / ready-to-drink shakes</div>
 </div>
+</div>
+
+<div class="category-section">
+<div class="category-name">Carbs</div>
+<div class="category-items">
+<div class="shopping-item-simple">• Microwave rice cups</div>
+<div class="shopping-item-simple">• Quinoa packets</div>
+<div class="shopping-item-simple">• Sweet potatoes</div>
+<div class="shopping-item-simple">• Low-carb or high-fiber wraps</div>
+<div class="shopping-item-simple">• Oats</div>
+<div class="shopping-item-simple">• Rice cakes</div>
+</div>
+</div>
+
+<div class="category-section">
+<div class="category-name">Vegetables</div>
+<div class="category-items">
+<div class="shopping-item-simple">• Frozen broccoli</div>
+<div class="shopping-item-simple">• Frozen mixed vegetables</div>
+<div class="shopping-item-simple">• Frozen spinach</div>
+<div class="shopping-item-simple">• Pre-washed salad kits</div>
+<div class="shopping-item-simple">• Baby carrots</div>
+<div class="shopping-item-simple">• Cherry tomatoes</div>
+<div class="shopping-item-simple">• Cucumbers</div>
+<div class="shopping-item-simple">• Bell peppers</div>
+</div>
+</div>
+
+<div class="category-section">
+<div class="category-name">Fruit</div>
+<div class="category-items">
+<div class="shopping-item-simple">• Berries</div>
+<div class="shopping-item-simple">• Apples</div>
+<div class="shopping-item-simple">• Bananas</div>
+</div>
+</div>
+
+<div class="category-section">
+<div class="category-name">Fats & Sauces</div>
+<div class="category-items">
+<div class="shopping-item-simple">• Avocado</div>
+<div class="shopping-item-simple">• Olive oil spray</div>
+<div class="shopping-item-simple">• Light vinaigrette</div>
+<div class="shopping-item-simple">• Hummus</div>
+<div class="shopping-item-simple">• Salsa</div>
+<div class="shopping-item-simple">• Hot sauce</div>
+<div class="shopping-item-simple">• Mustard</div>
+<div class="shopping-item-simple">• Low-sodium soy sauce</div>
+</div>
+</div>
+
+<div class="section-title" style="margin-top:60px">🍽️ Easy Meals</div>
+<div class="meal-grid">
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🍗 Chicken Bowl</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Pre-cooked chicken</li>
+<li>Microwave rice</li>
+<li>Frozen broccoli</li>
+<li>Salsa or hot sauce</li>
+</ul>
+<h4>Prep</h4>
+<p>Microwave rice and broccoli. Add chicken. Top with salsa or hot sauce.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🍳 Egg Bowl</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Eggs or egg whites</li>
+<li>Spinach</li>
+<li>Low-fat cheese (optional)</li>
+</ul>
+<h4>Prep</h4>
+<p>Cook eggs. Add spinach while cooking. Add cheese if wanted.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🥄 Greek Yogurt Bowl</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Nonfat Greek yogurt</li>
+<li>Berries</li>
+<li>Honey or sweetener (optional)</li>
+</ul>
+<h4>Prep</h4>
+<p>Mix together. Done.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🌯 Turkey Wraps</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Lean ground turkey</li>
+<li>Lettuce wraps or low-carb wraps</li>
+<li>Salsa or mustard</li>
+</ul>
+<h4>Prep</h4>
+<p>Cook turkey. Add to wraps. Add sauce.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🥫 Tuna Snack</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Canned tuna</li>
+<li>Mustard or light mayo</li>
+<li>Rice cakes or cucumber slices</li>
+</ul>
+<h4>Prep</h4>
+<p>Mix tuna with sauce. Eat with rice cakes or cucumbers.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🍤 Shrimp Stir Fry</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Frozen shrimp</li>
+<li>Frozen mixed vegetables</li>
+<li>Soy sauce</li>
+</ul>
+<h4>Prep</h4>
+<p>Cook shrimp. Add vegetables. Add soy sauce.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🥣 Protein Oats</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Oats</li>
+<li>Protein powder</li>
+<li>Banana or berries</li>
+</ul>
+<h4>Prep</h4>
+<p>Microwave oats. Mix in protein powder. Add fruit.</p>
+</div>
+</div>
+
+<div class="meal" onclick="this.classList.toggle('open')">
+<div class="meal-name">🥗 Salad with Chicken</div>
+<div class="meal-body">
+<h4>Ingredients</h4>
+<ul>
+<li>Bagged salad kit</li>
+<li>Rotisserie chicken</li>
+</ul>
+<h4>Prep</h4>
+<p>Add salad to bowl. Add chicken. Use light dressing or half the packet.</p>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
 
 <div class="section-title" style="margin-top:60px">🍽️ Easy Meal Recipes</div>
 <div class="meal-grid">
